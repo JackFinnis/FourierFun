@@ -44,6 +44,7 @@ struct ActionBar: View {
                         ShareLink(item: Constants.shareURL)
                             .labelStyle(.iconOnly)
                             .font(.headline)
+                            .tint(.secondary)
                     }
                     .labelStyle(.iconOnly)
                     .buttonBorderShape(.circle)

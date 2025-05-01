@@ -52,7 +52,7 @@ class Model {
                 let cgPath = svg.path(size: .init(size))
                 let points = cgPath.copy(dashingWithPhase: 0, lengths: [2]).points
                 let scaledPoints = scale(points: points, size: size)
-                transform(points: scaledPoints)
+                transform(points: scaledPoints, size: size)
             } catch {
                 print(error)
                 return
@@ -61,8 +61,6 @@ class Model {
     }
     
     func scale(points: [CGPoint], size: CGSize) -> [CGPoint] {
-        self.size = size
-        
         let xs = points.compactMap { $0.x }
         let ys = points.compactMap { $0.y }
 
@@ -100,12 +98,12 @@ class Model {
         }
     }
     
-    func transform(points: [CGPoint]) {
+    func transform(points: [CGPoint], size: CGSize) {
+        self.size = size
         reset()
         guard points.count > 1 else { return }
         self.points = points
         update()
-        render()
     }
     
     func update() {
@@ -122,6 +120,7 @@ class Model {
             path.addLine(to: CGPoint(x: points[0].x, y: points[0].y))
             path.closeSubpath()
         }
+        render()
     }
 }
 

@@ -15,7 +15,24 @@ struct RootView: View {
             VStack(spacing: 0) {
                 Color(.systemGray6)
                     .ignoresSafeArea()
-                    .gesture(drawGesture)
+                    .gesture(
+                        DragGesture(minimumDistance: 0)
+                            .onChanged { value in
+                                if value.location == value.startLocation {
+                                    model.isDrawing = true
+                                    model.path = Path()
+                                    model.path?.move(to: value.location)
+                                } else {
+                                    model.path?.addLine(to: value.location)
+                                }
+                            }
+                            .onEnded { _ in
+                                model.isDrawing = false
+                                guard let path = model.path else { return }
+                                let points = path.cgPath.copy(dashingWithPhase: 0, lengths: [10]).points
+                                model.transform(points: points, size: geo.size)
+                            }
+                    )
                     .overlay {
                         if let path = model.path {
                             PathRenderer(path: path)
@@ -44,25 +61,6 @@ struct RootView: View {
             }
 #endif
         }
-    }
-    
-    var drawGesture: some Gesture {
-        DragGesture(minimumDistance: 0)
-            .onChanged { value in
-                if value.location == value.startLocation {
-                    model.isDrawing = true
-                    model.path = Path()
-                    model.path?.move(to: value.location)
-                } else {
-                    model.path?.addLine(to: value.location)
-                }
-            }
-            .onEnded { _ in
-                model.isDrawing = false
-                guard let path = model.path else { return }
-                let points = path.cgPath.copy(dashingWithPhase: 0, lengths: [10]).points
-                model.transform(points: points)
-            }
     }
 }
 

@@ -84,5 +84,5 @@ struct ActionBar: View {
 }
 
 #Preview {
-    RootView()
+    ContentView()
 }

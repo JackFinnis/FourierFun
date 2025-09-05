@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RootView: View {
+struct ContentView: View {
     @State var model = Model()
     
     var body: some View {
@@ -65,5 +65,5 @@ struct RootView: View {
 }
 
 #Preview {
-    RootView()
+    ContentView()
 }

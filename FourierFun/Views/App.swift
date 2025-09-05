@@ -11,7 +11,7 @@ import SwiftUI
 struct FourierApp: App {
     var body: some Scene {
         WindowGroup {
-            RootView()
+            ContentView()
             #if os(visionOS)
                 .frame(minWidth: 600, minHeight: 600)
             #endif

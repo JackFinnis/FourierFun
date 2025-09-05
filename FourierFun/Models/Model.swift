@@ -125,5 +125,5 @@ class Model {
 }
 
 #Preview {
-    RootView()
+    ContentView()
 }

@@ -8,6 +8,6 @@
 import Foundation
 
 struct Constants {
-    static let actionBarHeight = 80.0
-    static let shareURL = URL.documentsDirectory.appending(path: "Fourier.png")
+    static let actionBarHeight = 100.0
+    static let shareURL = URL.documentsDirectory.appending(path: "FourierFun.png")
 }

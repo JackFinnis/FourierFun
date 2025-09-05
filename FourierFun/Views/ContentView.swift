@@ -6,13 +6,15 @@
 //
 
 import SwiftUI
+import StoreKit
 
 struct ContentView: View {
+    @Environment(\.requestReview) var requestReview
     @State var model = Model()
     
     var body: some View {
-        GeometryReader { geo in
-            VStack(spacing: 0) {
+        NavigationStack {
+            GeometryReader { geo in
                 Color(.systemGray6)
                     .ignoresSafeArea()
                     .gesture(
@@ -45,13 +47,17 @@ struct ContentView: View {
                                 .allowsHitTesting(false)
                         }
                     }
+                    .overlay(alignment: .bottom) {
 #if os(iOS)
-                ActionBar(model: model, geo: geo)
-                    .frame(height: Constants.actionBarHeight, alignment: .bottom)
-                    .frame(maxWidth: .infinity)
-                    .background(.background)
-                    .shadow(color: .black.opacity(0.1), radius: 10)
+                        ActionBar(model: model, geo: geo)
+                            .frame(height: Constants.actionBarHeight)
+                            .frame(maxWidth: .infinity)
+                            .background(.bar)
+                            .overlay(alignment: .top) {
+                                Divider()
+                            }
 #endif
+                    }
             }
 #if os(visionOS)
             .ornament(attachmentAnchor: .scene(.bottom)) {
@@ -60,6 +66,19 @@ struct ContentView: View {
                     .glassBackgroundEffect(in: RoundedRectangle(cornerRadius: 30))
             }
 #endif
+            .navigationTitle("FourierFun")
+            .toolbarBackground(.visible, for: .navigationBar)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbarTitleMenu {
+                Button {
+                    requestReview()
+                } label: {
+                    Label("Rate FourierFun", systemImage: "star")
+                }
+                Link(destination: URL(string: "mailto:jack@jackfinnis.com?subject=FourierFun%20Feedback")!) {
+                    Label("Improve FourierFun", systemImage: "envelope")
+                }
+            }
         }
     }
 }

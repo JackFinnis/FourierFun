@@ -13,17 +13,11 @@ struct ActionBar: View {
     
     @State var showFileImporter = false
     
-#if os(iOS)
-    let spacing = 5.0
-#elseif os(visionOS)
-    let spacing = 10.0
-#endif
-    
     var body: some View {
         ZStack {
             if model.isDrawing {
             } else if model.path != nil {
-                VStack(spacing: spacing) {
+                VStack(spacing: 10) {
                     HStack(spacing: 15) {
                         Button {
                             model.reset()
@@ -68,7 +62,7 @@ struct ActionBar: View {
                     }
                     .menuStyle(.button)
                 }
-                .buttonStyle(.bordered)
+                .buttonStyle(.borderedProminent)
                 .buttonBorderShape(.capsule)
                 .font(.headline)
                 #if os(iOS)

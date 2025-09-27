@@ -12,11 +12,6 @@ struct FourierApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-            #if os(visionOS)
-                .frame(minWidth: 600, minHeight: 600)
-            #endif
         }
-        .defaultSize(width: 800, height: 800)
-        .windowResizability(.contentMinSize)
     }
 }

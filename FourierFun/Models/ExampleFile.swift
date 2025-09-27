@@ -13,8 +13,19 @@ enum ExampleFile: String, CaseIterable {
     
     var name: String {
         switch self {
-        case .fourier:      return "Joseph Fourier"
-        case .pi:           return "Pi"
+        case .fourier:
+            return "Joseph Fourier"
+        case .pi:
+            return "Pi"
+        }
+    }
+    
+    var systemImage: String {
+        switch self {
+        case .fourier:
+            return "person"
+        case .pi:
+            return "pi"
         }
     }
     

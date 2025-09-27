@@ -12,11 +12,23 @@ struct ContentView: View {
     @Environment(\.requestReview) var requestReview
     @State var model = Model()
     
+    @State var showFileImporter = false
+    
     var body: some View {
         NavigationStack {
             GeometryReader { geo in
-                Color(.systemGray6)
-                    .ignoresSafeArea()
+                Rectangle()
+                    .fill(.background)
+                    .overlay {
+                        if let path = model.path {
+                            PathRenderer(path: path)
+                        } else {
+                            Image(systemName: "hand.draw.fill")
+                                .font(.largeTitle)
+                                .imageScale(.large)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
                     .gesture(
                         DragGesture(minimumDistance: 0)
                             .onChanged { value in
@@ -35,49 +47,76 @@ struct ContentView: View {
                                 model.transform(points: points, size: geo.size)
                             }
                     )
-                    .overlay {
-                        if let path = model.path {
-                            PathRenderer(path: path)
-                        } else {
-                            Image(systemName: "hand.draw")
-                                .font(.largeTitle)
-                                .imageScale(.large)
-                                .foregroundStyle(.secondary)
-                                .padding(.bottom, 50)
-                                .allowsHitTesting(false)
+                    .navigationTitle("FourierFun")
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbarTitleMenu {
+                        Button {
+                            requestReview()
+                        } label: {
+                            Label("Rate FourierFun", systemImage: "star")
+                        }
+                        Link(destination: URL(string: "mailto:jack@jackfinnis.com?subject=FourierFun%20Feedback")!) {
+                            Label("Improve FourierFun", systemImage: "envelope")
                         }
                     }
-                    .overlay(alignment: .bottom) {
-#if os(iOS)
-                        ActionBar(model: model, geo: geo)
-                            .frame(height: Constants.actionBarHeight)
-                            .frame(maxWidth: .infinity)
-                            .background(.bar)
-                            .overlay(alignment: .top) {
-                                Divider()
+                    .toolbar {
+                        ToolbarItem(placement: .primaryAction) {
+                            Menu {
+                                Button {
+                                    showFileImporter = true
+                                } label: {
+                                    Label("Import SVG", systemImage: "square.and.arrow.down")
+                                }
+                                Section("View Example") {
+                                    ForEach(ExampleFile.allCases, id: \.self) { file in
+                                        Button {
+                                            model.importSVG(result: .success(file.url), size: geo.size)
+                                        } label: {
+                                            Label(file.name, systemImage: file.systemImage)
+                                        }
+                                    }
+                                }
+                            } label: {
+                                Label("View Example", systemImage: "plus")
                             }
-#endif
+                            .menuOrder(.fixed)
+                        }
                     }
-            }
-#if os(visionOS)
-            .ornament(attachmentAnchor: .scene(.bottom)) {
-                ActionBar(model: model, geo: geo)
-                    .frame(width: 500, height: 115)
-                    .glassBackgroundEffect(in: RoundedRectangle(cornerRadius: 30))
-            }
-#endif
-            .navigationTitle("FourierFun")
-            .toolbarBackground(.visible, for: .navigationBar)
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbarTitleMenu {
-                Button {
-                    requestReview()
-                } label: {
-                    Label("Rate FourierFun", systemImage: "star")
-                }
-                Link(destination: URL(string: "mailto:jack@jackfinnis.com?subject=FourierFun%20Feedback")!) {
-                    Label("Improve FourierFun", systemImage: "envelope")
-                }
+                    .sheet(isPresented: .constant(true)) {
+                        NavigationStack {
+                            if model.path != nil && !model.isDrawing {
+                                Slider(value: $model.epicycles, in: model.nRange, step: 1) { isSliding in
+                                    if !isSliding { model.update() }
+                                }
+                                .padding(20)
+                                .navigationBarTitleDisplayMode(.inline)
+                                .toolbar {
+                                    ToolbarItem(placement: .cancellationAction) {
+                                        Button {
+                                            model.reset()
+                                        } label: {
+                                            Label("Reset", systemImage: "xmark")
+                                        }
+                                    }
+                                    ToolbarItem(placement: .principal) {
+                                        Stepper(Int(model.epicycles).formatted(singular: "Epicycle"), value: $model.epicycles, in: model.nRange) { isStepping in
+                                            if !isStepping { model.update() }
+                                        }
+                                        .font(.headline)
+                                    }
+                                    ToolbarItem(placement: .topBarTrailing) {
+                                        ShareLink(item: Constants.shareURL)
+                                    }
+                                }
+                            }
+                        }
+                        .interactiveDismissDisabled()
+                        .presentationBackgroundInteraction(.enabled)
+                        .presentationDetents([PresentationDetent.height(Constants.actionBarHeight)])
+                    }
+                    .fileImporter(isPresented: $showFileImporter, allowedContentTypes: [.svg]) { result in
+                        model.importSVG(result: result, size: geo.size)
+                    }
             }
         }
     }

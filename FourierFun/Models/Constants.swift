@@ -5,9 +5,13 @@
 //  Created by Jack Finnis on 19/06/2024.
 //
 
-import Foundation
+import SwiftUI
 
 struct Constants {
-    static let actionBarHeight = 100.0
+    static let actionBarHeight = 120.0
     static let shareURL = URL.documentsDirectory.appending(path: "FourierFun.png")
+}
+
+#Preview {
+    ContentView()
 }

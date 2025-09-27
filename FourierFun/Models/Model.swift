@@ -79,9 +79,7 @@ class Model {
 
         let targetWidth = size.width
         var targetHeight = size.height
-        #if os(iOS)
         targetHeight -= Constants.actionBarHeight
-        #endif
 
         let padding: CGFloat = 50
         let widthScale = (targetWidth - padding) / oldWidth
@@ -107,9 +105,7 @@ class Model {
     }
     
     func update() {
-        #if os(iOS)
         UIImpactFeedbackGenerator().impactOccurred()
-        #endif
         epicycles = min(epicycles, Double(points.count))
         let points = Fourier.transform(N: Int(epicycles), points: points)
         path = Path { path in

@@ -36,7 +36,7 @@
 		04B5F3BA293A16520088A0D9 /* fourier.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = fourier.svg; sourceTree = "<group>"; };
 		04BA915F26DB9FE600014C93 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		04BA916526DBFB4400014C93 /* Fourier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fourier.swift; sourceTree = "<group>"; };
-		04FCE2CE26D5046F001D1BE8 /* FourierFun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FourierFun.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		04FCE2CE26D5046F001D1BE8 /* Fourier Fun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fourier Fun.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		04FCE2D126D5046F001D1BE8 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		04FCE2D526D50470001D1BE8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04FCE2DA26D50470001D1BE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -108,7 +108,7 @@
 		04FCE2CF26D5046F001D1BE8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				04FCE2CE26D5046F001D1BE8 /* FourierFun.app */,
+				04FCE2CE26D5046F001D1BE8 /* Fourier Fun.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -127,9 +127,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		04FCE2CD26D5046F001D1BE8 /* FourierFun */ = {
+		04FCE2CD26D5046F001D1BE8 /* Fourier Fun */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 04FCE2DD26D50470001D1BE8 /* Build configuration list for PBXNativeTarget "FourierFun" */;
+			buildConfigurationList = 04FCE2DD26D50470001D1BE8 /* Build configuration list for PBXNativeTarget "Fourier Fun" */;
 			buildPhases = (
 				04FCE2CA26D5046F001D1BE8 /* Sources */,
 				04FCE2CB26D5046F001D1BE8 /* Frameworks */,
@@ -139,13 +139,13 @@
 			);
 			dependencies = (
 			);
-			name = FourierFun;
+			name = "Fourier Fun";
 			packageProductDependencies = (
 				04BA916826DC008900014C93 /* ComplexModule */,
 				049BDA192C4E79DA00652F71 /* VectorPlus */,
 			);
 			productName = Fourier;
-			productReference = 04FCE2CE26D5046F001D1BE8 /* FourierFun.app */;
+			productReference = 04FCE2CE26D5046F001D1BE8 /* Fourier Fun.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -180,7 +180,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				04FCE2CD26D5046F001D1BE8 /* FourierFun */,
+				04FCE2CD26D5046F001D1BE8 /* Fourier Fun */,
 			);
 		};
 /* End PBXProject section */
@@ -415,7 +415,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		04FCE2DD26D50470001D1BE8 /* Build configuration list for PBXNativeTarget "FourierFun" */ = {
+		04FCE2DD26D50470001D1BE8 /* Build configuration list for PBXNativeTarget "Fourier Fun" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				04FCE2DE26D50470001D1BE8 /* Debug */,

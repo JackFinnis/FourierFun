@@ -354,7 +354,7 @@
 				DEVELOPMENT_ASSET_PATHS = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = FourierFun/Resources/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = FourierFun;
+				INFOPLIST_KEY_CFBundleDisplayName = "Fourier Fun";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.graphics-design";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -384,7 +384,7 @@
 				DEVELOPMENT_ASSET_PATHS = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = FourierFun/Resources/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = FourierFun;
+				INFOPLIST_KEY_CFBundleDisplayName = "Fourier Fun";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.graphics-design";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct Constants {
     static let actionBarHeight = 120.0
-    static let shareURL = URL.documentsDirectory.appending(path: "FourierFun.png")
+    static let shareURL = URL.documentsDirectory.appending(path: "Fourier Fun.png")
 }
 
 #Preview {

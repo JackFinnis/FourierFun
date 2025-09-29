@@ -17,22 +17,27 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             GeometryReader { geo in
+                let size = CGSize(
+                    width: geo.size.width + geo.safeAreaInsets.leading + geo.safeAreaInsets.trailing,
+                    height: geo.size.height + geo.safeAreaInsets.top + geo.safeAreaInsets.bottom
+                )
+                
                 ZStack {
                     Rectangle()
                         .fill(.background)
                     
                     if let path = model.path {
                         PathRenderer(path: path)
+                            .ignoresSafeArea()
                     } else {
                         Image(systemName: "hand.draw.fill")
                             .font(.largeTitle)
                             .imageScale(.large)
                             .foregroundStyle(.secondary)
-                            .padding(.bottom, Constants.actionBarHeight)
                     }
                 }
                 .gesture(
-                    DragGesture(minimumDistance: 0)
+                    DragGesture(minimumDistance: 0, coordinateSpace: .global)
                         .onChanged { value in
                             if value.location == value.startLocation {
                                 model.isDrawing = true
@@ -46,9 +51,10 @@ struct ContentView: View {
                             model.isDrawing = false
                             guard let path = model.path else { return }
                             let points = path.cgPath.copy(dashingWithPhase: 0, lengths: [10]).points
-                            model.transform(points: points, size: geo.size)
+                            model.transform(points: points, size: size)
                         }
                 )
+                .padding(.bottom, Constants.actionBarHeight)
                 .navigationTitle("Fourier Fun")
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbarTitleMenu {
@@ -72,7 +78,7 @@ struct ContentView: View {
                             Section("View Example") {
                                 ForEach(ExampleFile.allCases, id: \.self) { file in
                                     Button {
-                                        model.importSVG(result: .success(file.url), size: geo.size)
+                                        model.importSVG(result: .success(file.url), size: size)
                                     } label: {
                                         Label(file.name, systemImage: file.systemImage)
                                     }
@@ -85,10 +91,9 @@ struct ContentView: View {
                     }
                 }
                 .fileImporter(isPresented: $showFileImporter, allowedContentTypes: [.svg]) { result in
-                    model.importSVG(result: result, size: geo.size)
+                    model.importSVG(result: result, size: size)
                 }
             }
-            .ignoresSafeArea()
         }
         .sheet(isPresented: .constant(true)) {
             NavigationStack {

@@ -10,15 +10,20 @@ import StoreKit
 
 struct ContentView: View {
     @Environment(\.requestReview) var requestReview
-    @Environment(\.horizontalSizeClass) var horizontalSizeClass
-    @Environment(\.verticalSizeClass) var verticalSizeClass
     @State var model = Model()
     @State var showFileImporter = false
-    @State var showActionBar = true
+    
+    var title: String {
+        if model.path == nil {
+            return "Fourier Fun"
+        } else if model.isDrawing {
+            return ""
+        } else {
+            return Int(model.epicycles).formatted(singular: "Epicycle")
+        }
+    }
     
     var body: some View {
-        let portrait = horizontalSizeClass == .compact && verticalSizeClass == .regular
-        
         NavigationStack {
             GeometryReader { geo in
                 let size = CGSize(
@@ -58,10 +63,13 @@ struct ContentView: View {
                             model.transform(points: points, size: size)
                         }
                 )
-                .padding(.bottom, Constants.actionBarHeight)
-                .navigationTitle("Fourier Fun")
+                .navigationTitle(title)
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbarTitleMenu {
+                    Link(destination: URL(string: "https://youtu.be/r6sGWTCMz2k")!) {
+                        Label("But what is a Fourier series?", systemImage: "safari")
+                    }
+                    Divider()
                     Button {
                         requestReview()
                     } label: {
@@ -72,51 +80,32 @@ struct ContentView: View {
                     }
                 }
                 .toolbar {
-                    ToolbarItem(placement: .primaryAction) {
-                        Menu {
-                            Button {
-                                showFileImporter = true
-                            } label: {
-                                Label("Import SVG", systemImage: "square.and.arrow.down")
-                            }
-                            Section("View Example") {
-                                ForEach(ExampleFile.allCases, id: \.self) { file in
-                                    Button {
-                                        model.importSVG(result: .success(file.url), size: size)
-                                    } label: {
-                                        Label(file.name, systemImage: file.systemImage)
+                    if model.path == nil {
+                        ToolbarItem(placement: .primaryAction) {
+                            Menu {
+                                Button {
+                                    showFileImporter = true
+                                } label: {
+                                    Label("Import SVG", systemImage: "square.and.arrow.down")
+                                }
+                                Section("View Example") {
+                                    ForEach(ExampleFile.allCases, id: \.self) { file in
+                                        Button {
+                                            model.importSVG(result: .success(file.url), size: size)
+                                        } label: {
+                                            Label(file.name, systemImage: file.systemImage)
+                                        }
                                     }
                                 }
-                            }
-                        } label: {
-                            Label("View Example", systemImage: "plus")
-                        }
-                        .menuOrder(.fixed)
-                    }
-                    ToolbarItem(placement: .bottomBar) {
-                        if !portrait || !showActionBar {
-                            Button {
-                                showActionBar.toggle()
                             } label: {
-                                Label("\(showActionBar ? "Hide" : "Show") Action Bar", systemImage: showActionBar ? "chevron.down" : "chevron.up")
+                                Label("View Example", systemImage: "plus")
+                            }
+                            .menuOrder(.fixed)
+                            .fileImporter(isPresented: $showFileImporter, allowedContentTypes: [.svg]) { result in
+                                model.importSVG(result: result, size: size)
                             }
                         }
-                    }
-                }
-                .fileImporter(isPresented: $showFileImporter, allowedContentTypes: [.svg]) { result in
-                    model.importSVG(result: result, size: size)
-                }
-            }
-        }
-        .sheet(isPresented: $showActionBar) {
-            NavigationStack {
-                if model.path != nil && !model.isDrawing {
-                    Slider(value: $model.epicycles, in: model.nRange, step: 1) { isSliding in
-                        if !isSliding { model.update() }
-                    }
-                    .padding(20)
-                    .navigationBarTitleDisplayMode(.inline)
-                    .toolbar {
+                    } else if !model.isDrawing {
                         ToolbarItem(placement: .topBarLeading) {
                             Button {
                                 model.reset()
@@ -124,23 +113,28 @@ struct ContentView: View {
                                 Label("Reset", systemImage: "trash")
                             }
                         }
-                        ToolbarItem(placement: .principal) {
-                            Stepper(Int(model.epicycles).formatted(singular: "Epicycle"), value: $model.epicycles, in: model.nRange) { isStepping in
-                                if !isStepping { model.update() }
-                            }
-                            .font(.headline)
-                        }
                         ToolbarItem(placement: .topBarTrailing) {
                             ShareLink(item: Constants.shareURL)
                         }
+                        ToolbarItem(placement: .bottomBar) {
+                            Slider(value: $model.epicycles, in: model.nRange, step: 1) { isSliding in
+                                if !isSliding { model.update() }
+                            }
+                            .padding(.leading, 10)
+                        }
+                        ToolbarItem(placement: .bottomBar) {
+                            Stepper("Epicycles", value: $model.epicycles, in: model.nRange) { isStepping in
+                                if !isStepping { model.update() }
+                            }
+                            .font(.headline)
+                            .labelsHidden()
+                            .padding(.trailing, 5)
+                        }
                     }
                 }
+                .monospacedDigit()
             }
-            .interactiveDismissDisabled(portrait)
-            .presentationBackgroundInteraction(.enabled)
-            .presentationDetents([PresentationDetent.height(Constants.actionBarHeight)])
         }
-        .monospacedDigit()
     }
 }
 

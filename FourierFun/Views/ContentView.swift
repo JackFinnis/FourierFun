@@ -120,15 +120,16 @@ struct ContentView: View {
                             Slider(value: $model.epicycles, in: model.nRange, step: 1) { isSliding in
                                 if !isSliding { model.update() }
                             }
-                            .padding(.leading, 10)
+                            .padding(.horizontal, 10)
                         }
+                        ToolbarSpacer(placement: .bottomBar)
                         ToolbarItem(placement: .bottomBar) {
                             Stepper("Epicycles", value: $model.epicycles, in: model.nRange) { isStepping in
                                 if !isStepping { model.update() }
                             }
                             .font(.headline)
                             .labelsHidden()
-                            .padding(.trailing, 5)
+                            .padding(.horizontal, 5)
                         }
                     }
                 }

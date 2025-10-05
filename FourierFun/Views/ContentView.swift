@@ -10,11 +10,15 @@ import StoreKit
 
 struct ContentView: View {
     @Environment(\.requestReview) var requestReview
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    @Environment(\.verticalSizeClass) var verticalSizeClass
     @State var model = Model()
-    
     @State var showFileImporter = false
+    @State var showActionBar = true
     
     var body: some View {
+        let portrait = horizontalSizeClass == .compact && verticalSizeClass == .regular
+        
         NavigationStack {
             GeometryReader { geo in
                 let size = CGSize(
@@ -89,13 +93,22 @@ struct ContentView: View {
                         }
                         .menuOrder(.fixed)
                     }
+                    ToolbarItem(placement: .bottomBar) {
+                        if !portrait || !showActionBar {
+                            Button {
+                                showActionBar.toggle()
+                            } label: {
+                                Label("\(showActionBar ? "Hide" : "Show") Action Bar", systemImage: showActionBar ? "chevron.down" : "chevron.up")
+                            }
+                        }
+                    }
                 }
                 .fileImporter(isPresented: $showFileImporter, allowedContentTypes: [.svg]) { result in
                     model.importSVG(result: result, size: size)
                 }
             }
         }
-        .sheet(isPresented: .constant(true)) {
+        .sheet(isPresented: $showActionBar) {
             NavigationStack {
                 if model.path != nil && !model.isDrawing {
                     Slider(value: $model.epicycles, in: model.nRange, step: 1) { isSliding in
@@ -104,11 +117,11 @@ struct ContentView: View {
                     .padding(20)
                     .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
-                        ToolbarItem(placement: .cancellationAction) {
+                        ToolbarItem(placement: .topBarLeading) {
                             Button {
                                 model.reset()
                             } label: {
-                                Label("Reset", systemImage: "xmark")
+                                Label("Reset", systemImage: "trash")
                             }
                         }
                         ToolbarItem(placement: .principal) {
@@ -123,7 +136,7 @@ struct ContentView: View {
                     }
                 }
             }
-            .interactiveDismissDisabled()
+            .interactiveDismissDisabled(portrait)
             .presentationBackgroundInteraction(.enabled)
             .presentationDetents([PresentationDetent.height(Constants.actionBarHeight)])
         }

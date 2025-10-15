@@ -15,7 +15,7 @@ struct ContentView: View {
     
     var title: String {
         if model.path == nil {
-            return "Fourier Fun"
+            return "Fourier"
         } else if model.isDrawing {
             return ""
         } else {
@@ -73,10 +73,10 @@ struct ContentView: View {
                     Button {
                         requestReview()
                     } label: {
-                        Label("Rate Fourier Fun", systemImage: "star")
+                        Label("Rate Fourier", systemImage: "star")
                     }
-                    Link(destination: URL(string: "mailto:jack@jackfinnis.com?subject=Fourier%20Fun%20Feedback")!) {
-                        Label("Improve Fourier Fun", systemImage: "envelope")
+                    Link(destination: URL(string: "mailto:jack@jackfinnis.com?subject=Fourier%20Feedback")!) {
+                        Label("Improve Fourier", systemImage: "envelope")
                     }
                 }
                 .toolbar {

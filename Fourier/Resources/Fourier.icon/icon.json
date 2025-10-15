@@ -10,7 +10,14 @@
             "solid" : "extended-gray:1.00000,1.00000"
           },
           "image-name" : "new-moon.png",
-          "name" : "new-moon"
+          "name" : "new-moon",
+          "position" : {
+            "scale" : 1.1,
+            "translation-in-points" : [
+              0,
+              0
+            ]
+          }
         }
       ],
       "shadow" : {

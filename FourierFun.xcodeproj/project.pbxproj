@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0441C9DC2EA0458A007B4243 /* Fourier.icon in Resources */ = {isa = PBXBuildFile; fileRef = 0441C9DB2EA0458A007B4243 /* Fourier.icon */; };
 		046203B52C2397C400AB6BD9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046203B42C2397C400AB6BD9 /* Constants.swift */; };
 		046203B72C23A7EC00AB6BD9 /* pi.svg in Resources */ = {isa = PBXBuildFile; fileRef = 046203B62C23A7EC00AB6BD9 /* pi.svg */; };
 		049BDA1A2C4E79DA00652F71 /* VectorPlus in Frameworks */ = {isa = PBXBuildFile; productRef = 049BDA192C4E79DA00652F71 /* VectorPlus */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0441C9DB2EA0458A007B4243 /* Fourier.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = Fourier.icon; sourceTree = "<group>"; };
 		046203B42C2397C400AB6BD9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		046203B62C23A7EC00AB6BD9 /* pi.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = pi.svg; sourceTree = "<group>"; };
 		049BDA1E2C4E856A00652F71 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 		04B5F3882938BBA70088A0D9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0441C9DB2EA0458A007B4243 /* Fourier.icon */,
 				04FCE2D526D50470001D1BE8 /* Assets.xcassets */,
 				04B5F3BA293A16520088A0D9 /* fourier.svg */,
 				046203B62C23A7EC00AB6BD9 /* pi.svg */,
@@ -193,6 +196,7 @@
 				04FCE2D626D50470001D1BE8 /* Assets.xcassets in Resources */,
 				046203B72C23A7EC00AB6BD9 /* pi.svg in Resources */,
 				04B5F3BB293A16520088A0D9 /* fourier.svg in Resources */,
+				0441C9DC2EA0458A007B4243 /* Fourier.icon in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,7 +350,7 @@
 		04FCE2DE26D50470001D1BE8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = Fourier;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -376,7 +380,7 @@
 		04FCE2DF26D50470001D1BE8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = Fourier;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;

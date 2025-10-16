@@ -10,6 +10,7 @@ import StoreKit
 
 struct ContentView: View {
     @Environment(\.requestReview) var requestReview
+    @AppStorage("featuresUsed") var featuresUsed = 0
     @State var model = Model()
     @State var showFileImporter = false
     
@@ -134,6 +135,16 @@ struct ContentView: View {
                     }
                 }
                 .monospacedDigit()
+            }
+        }
+        .onChange(of: model.path) { _, _ in
+            if model.path == nil {
+                featuresUsed += 1
+            }
+        }
+        .onChange(of: featuresUsed) { _, _ in
+            if featuresUsed.isMultiple(of: 10) {
+                requestReview()
             }
         }
     }

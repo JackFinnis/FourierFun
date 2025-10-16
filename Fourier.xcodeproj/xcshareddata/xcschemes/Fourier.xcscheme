@@ -16,8 +16,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "04FCE2CD26D5046F001D1BE8"
-               BuildableName = "Fourier Fun.app"
-               BlueprintName = "Fourier Fun"
+               BuildableName = "Fourier.app"
+               BlueprintName = "Fourier"
                ReferencedContainer = "container:Fourier.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,8 +45,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "04FCE2CD26D5046F001D1BE8"
-            BuildableName = "Fourier Fun.app"
-            BlueprintName = "Fourier Fun"
+            BuildableName = "Fourier.app"
+            BlueprintName = "Fourier"
             ReferencedContainer = "container:Fourier.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -62,8 +62,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "04FCE2CD26D5046F001D1BE8"
-            BuildableName = "Fourier Fun.app"
-            BlueprintName = "Fourier Fun"
+            BuildableName = "Fourier.app"
+            BlueprintName = "Fourier"
             ReferencedContainer = "container:Fourier.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

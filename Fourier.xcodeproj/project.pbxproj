@@ -11,8 +11,6 @@
 		046203B52C2397C400AB6BD9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046203B42C2397C400AB6BD9 /* Constants.swift */; };
 		046203B72C23A7EC00AB6BD9 /* pi.svg in Resources */ = {isa = PBXBuildFile; fileRef = 046203B62C23A7EC00AB6BD9 /* pi.svg */; };
 		049BDA1A2C4E79DA00652F71 /* VectorPlus in Frameworks */ = {isa = PBXBuildFile; productRef = 049BDA192C4E79DA00652F71 /* VectorPlus */; };
-		049BDA1F2C4E856A00652F71 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049BDA1E2C4E856A00652F71 /* ContentView.swift */; };
-		049BDA232C4E859100652F71 /* PathRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049BDA222C4E859100652F71 /* PathRenderer.swift */; };
 		049BDA252C4E85A300652F71 /* ExampleFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049BDA242C4E85A300652F71 /* ExampleFile.swift */; };
 		04A6557F293D24450084CC6A /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A6557E293D24450084CC6A /* Collection.swift */; };
 		04B5F38A2938C1AE0088A0D9 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B5F3892938C1AE0088A0D9 /* Int.swift */; };
@@ -29,8 +27,6 @@
 		0441C9DB2EA0458A007B4243 /* Fourier.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = Fourier.icon; sourceTree = "<group>"; };
 		046203B42C2397C400AB6BD9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		046203B62C23A7EC00AB6BD9 /* pi.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = pi.svg; sourceTree = "<group>"; };
-		049BDA1E2C4E856A00652F71 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		049BDA222C4E859100652F71 /* PathRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathRenderer.swift; sourceTree = "<group>"; };
 		049BDA242C4E85A300652F71 /* ExampleFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleFile.swift; sourceTree = "<group>"; };
 		04A6557E293D24450084CC6A /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		04B5F3892938C1AE0088A0D9 /* Int.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
@@ -57,16 +53,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		049BDA1C2C4E855700652F71 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				04FCE2D126D5046F001D1BE8 /* App.swift */,
-				049BDA1E2C4E856A00652F71 /* ContentView.swift */,
-				049BDA222C4E859100652F71 /* PathRenderer.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		049BDA1D2C4E855E00652F71 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -122,7 +108,7 @@
 				04A65580293D436E0084CC6A /* Extensions */,
 				049BDA1D2C4E855E00652F71 /* Models */,
 				04B5F3882938BBA70088A0D9 /* Resources */,
-				049BDA1C2C4E855700652F71 /* Views */,
+				04FCE2D126D5046F001D1BE8 /* App.swift */,
 			);
 			path = Fourier;
 			sourceTree = "<group>";
@@ -207,13 +193,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				049BDA232C4E859100652F71 /* PathRenderer.swift in Sources */,
 				04BA916026DB9FE600014C93 /* Model.swift in Sources */,
 				04FCE2D226D5046F001D1BE8 /* App.swift in Sources */,
 				049BDA252C4E85A300652F71 /* ExampleFile.swift in Sources */,
 				04A6557F293D24450084CC6A /* Collection.swift in Sources */,
 				04B5F3B9293965F60088A0D9 /* CGPath.swift in Sources */,
-				049BDA1F2C4E856A00652F71 /* ContentView.swift in Sources */,
 				04BA916626DBFB4400014C93 /* Fourier.swift in Sources */,
 				04B5F38A2938C1AE0088A0D9 /* Int.swift in Sources */,
 				046203B52C2397C400AB6BD9 /* Constants.swift in Sources */,
@@ -365,7 +349,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0;
+				MARKETING_VERSION = 2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = JackFinnis.Fourier;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -395,7 +379,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0;
+				MARKETING_VERSION = 2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = JackFinnis.Fourier;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

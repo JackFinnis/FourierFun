@@ -1,12 +1,21 @@
 //
-//  RootView.swift
+//  FourierApp.swift
 //  Fourier
 //
-//  Created by Jack Finnis on 22/07/2024.
+//  Created by Jack Finnis on 24/08/2021.
 //
 
 import SwiftUI
 import StoreKit
+
+@main
+struct FourierApp: App {
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+    }
+}
 
 struct ContentView: View {
     @Environment(\.requestReview) var requestReview
@@ -68,16 +77,23 @@ struct ContentView: View {
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbarTitleMenu {
                     Link(destination: URL(string: "https://youtu.be/r6sGWTCMz2k")!) {
-                        Label("But what is a Fourier series?", systemImage: "safari")
+                        Label("But what is a Fourier series?", systemImage: "play.rectangle.fill")
                     }
-                    Divider()
-                    Button {
-                        requestReview()
-                    } label: {
-                        Label("Rate Fourier", systemImage: "star")
-                    }
-                    Link(destination: URL(string: "mailto:jack@jackfinnis.com?subject=Fourier%20Feedback")!) {
-                        Label("Improve Fourier", systemImage: "envelope")
+                    Section("Fourier") {
+                        Button {
+                            requestReview()
+                        } label: {
+                            Label("Rate This App", systemImage: "star")
+                        }
+                        Link(destination: URL(string: "https://apps.apple.com/app/id1582827502?action=write-review")!) {
+                            Label("Leave a Review", systemImage: "quote.bubble")
+                        }
+                        Link(destination: URL(string: "mailto:jack@jackfinnis.com?subject=Fourier%20Feedback")!) {
+                            Label("Send Feedback", systemImage: "envelope")
+                        }
+                        Link(destination: URL(string: "https://apps.apple.com/developer/1633101066")!) {
+                            Label("More Apps by Jack", systemImage: "square.grid.2x2")
+                        }
                     }
                 }
                 .toolbar {
@@ -152,4 +168,12 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+}
+
+struct PathRenderer: View {
+    let path: Path
+    
+    var body: some View {
+        path.stroke(Color.accentColor, style: .init(lineWidth: 3, lineCap: .round, lineJoin: .round))
+    }
 }

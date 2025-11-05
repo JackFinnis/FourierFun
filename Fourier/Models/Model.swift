@@ -20,7 +20,7 @@ class Model {
     var size = CGSize()
     
     var nRange: ClosedRange<Double> {
-        1...min(Double(max(points.count, 1)), 500)
+        1...max(2, min(500, Double(max(points.count, 1))))
     }
     
     func reset() {

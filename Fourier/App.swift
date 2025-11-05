@@ -77,7 +77,9 @@ struct ContentView: View {
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbarTitleMenu {
                     Link(destination: URL(string: "https://youtu.be/r6sGWTCMz2k")!) {
-                        Label("But what is a Fourier series?", systemImage: "play.rectangle.fill")
+                        Text("But what is a Fourier series?")
+                        Text("3Blue1Brown, YouTube")
+                        Image(systemName: "play.rectangle.fill")
                     }
                     Section("Fourier") {
                         Button {
@@ -100,12 +102,15 @@ struct ContentView: View {
                     if model.path == nil {
                         ToolbarItem(placement: .primaryAction) {
                             Menu {
-                                Button {
-                                    showFileImporter = true
-                                } label: {
-                                    Label("Import SVG", systemImage: "square.and.arrow.down")
+                                Section("Import SVG") {
+                                    Button {
+                                        showFileImporter = true
+                                    } label: {
+                                        Text("Choose File")
+                                        Image(systemName: "folder")
+                                    }
                                 }
-                                Section("View Example") {
+                                Section("See Examples") {
                                     ForEach(ExampleFile.allCases, id: \.self) { file in
                                         Button {
                                             model.importSVG(result: .success(file.url), size: size)
@@ -115,7 +120,7 @@ struct ContentView: View {
                                     }
                                 }
                             } label: {
-                                Label("View Example", systemImage: "plus")
+                                Label("Import", systemImage: "plus")
                             }
                             .menuOrder(.fixed)
                             .fileImporter(isPresented: $showFileImporter, allowedContentTypes: [.svg]) { result in
@@ -127,7 +132,7 @@ struct ContentView: View {
                             Button {
                                 model.reset()
                             } label: {
-                                Label("Reset", systemImage: "trash")
+                                Label("Reset", systemImage: "xmark")
                             }
                         }
                         ToolbarItem(placement: .topBarTrailing) {

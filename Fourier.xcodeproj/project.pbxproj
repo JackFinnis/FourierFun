@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0441C9DC2EA0458A007B4243 /* Fourier.icon in Resources */ = {isa = PBXBuildFile; fileRef = 0441C9DB2EA0458A007B4243 /* Fourier.icon */; };
-		046203B52C2397C400AB6BD9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046203B42C2397C400AB6BD9 /* Constants.swift */; };
 		046203B72C23A7EC00AB6BD9 /* pi.svg in Resources */ = {isa = PBXBuildFile; fileRef = 046203B62C23A7EC00AB6BD9 /* pi.svg */; };
 		049BDA1A2C4E79DA00652F71 /* VectorPlus in Frameworks */ = {isa = PBXBuildFile; productRef = 049BDA192C4E79DA00652F71 /* VectorPlus */; };
 		049BDA252C4E85A300652F71 /* ExampleFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049BDA242C4E85A300652F71 /* ExampleFile.swift */; };
@@ -19,13 +18,16 @@
 		04BA916026DB9FE600014C93 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BA915F26DB9FE600014C93 /* Model.swift */; };
 		04BA916626DBFB4400014C93 /* Fourier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BA916526DBFB4400014C93 /* Fourier.swift */; };
 		04BA916926DC008900014C93 /* ComplexModule in Frameworks */ = {isa = PBXBuildFile; productRef = 04BA916826DC008900014C93 /* ComplexModule */; };
+		04E6181E2F5B558F0019EE9B /* EpicycleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E6181D2F5B558F0019EE9B /* EpicycleView.swift */; };
+		04E618202F5B96BD0019EE9B /* Speed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E6181F2F5B96BD0019EE9B /* Speed.swift */; };
+		04E618222F5B98900019EE9B /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E618212F5B988E0019EE9B /* URL.swift */; };
+		04E618242F5B9B920019EE9B /* PathRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E618232F5B9B920019EE9B /* PathRenderer.swift */; };
 		04FCE2D226D5046F001D1BE8 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCE2D126D5046F001D1BE8 /* App.swift */; };
 		04FCE2D626D50470001D1BE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04FCE2D526D50470001D1BE8 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0441C9DB2EA0458A007B4243 /* Fourier.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = Fourier.icon; sourceTree = "<group>"; };
-		046203B42C2397C400AB6BD9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		046203B62C23A7EC00AB6BD9 /* pi.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = pi.svg; sourceTree = "<group>"; };
 		049BDA242C4E85A300652F71 /* ExampleFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleFile.swift; sourceTree = "<group>"; };
 		04A6557E293D24450084CC6A /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
@@ -34,6 +36,10 @@
 		04B5F3BA293A16520088A0D9 /* fourier.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = fourier.svg; sourceTree = "<group>"; };
 		04BA915F26DB9FE600014C93 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		04BA916526DBFB4400014C93 /* Fourier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fourier.swift; sourceTree = "<group>"; };
+		04E6181D2F5B558F0019EE9B /* EpicycleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpicycleView.swift; sourceTree = "<group>"; };
+		04E6181F2F5B96BD0019EE9B /* Speed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speed.swift; sourceTree = "<group>"; };
+		04E618212F5B988E0019EE9B /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
+		04E618232F5B9B920019EE9B /* PathRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathRenderer.swift; sourceTree = "<group>"; };
 		04FCE2CE26D5046F001D1BE8 /* Fourier.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fourier.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04FCE2D126D5046F001D1BE8 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		04FCE2D526D50470001D1BE8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -56,10 +62,10 @@
 		049BDA1D2C4E855E00652F71 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				046203B42C2397C400AB6BD9 /* Constants.swift */,
 				049BDA242C4E85A300652F71 /* ExampleFile.swift */,
 				04BA916526DBFB4400014C93 /* Fourier.swift */,
 				04BA915F26DB9FE600014C93 /* Model.swift */,
+				04E6181F2F5B96BD0019EE9B /* Speed.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -67,6 +73,7 @@
 		04A65580293D436E0084CC6A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				04E618212F5B988E0019EE9B /* URL.swift */,
 				04B5F3892938C1AE0088A0D9 /* Int.swift */,
 				04B5F3B8293965F60088A0D9 /* CGPath.swift */,
 				04A6557E293D24450084CC6A /* Collection.swift */,
@@ -109,6 +116,8 @@
 				049BDA1D2C4E855E00652F71 /* Models */,
 				04B5F3882938BBA70088A0D9 /* Resources */,
 				04FCE2D126D5046F001D1BE8 /* App.swift */,
+				04E618232F5B9B920019EE9B /* PathRenderer.swift */,
+				04E6181D2F5B558F0019EE9B /* EpicycleView.swift */,
 			);
 			path = Fourier;
 			sourceTree = "<group>";
@@ -193,14 +202,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04E618242F5B9B920019EE9B /* PathRenderer.swift in Sources */,
 				04BA916026DB9FE600014C93 /* Model.swift in Sources */,
 				04FCE2D226D5046F001D1BE8 /* App.swift in Sources */,
+				04E6181E2F5B558F0019EE9B /* EpicycleView.swift in Sources */,
+				04E618222F5B98900019EE9B /* URL.swift in Sources */,
+				04E618202F5B96BD0019EE9B /* Speed.swift in Sources */,
 				049BDA252C4E85A300652F71 /* ExampleFile.swift in Sources */,
 				04A6557F293D24450084CC6A /* Collection.swift in Sources */,
 				04B5F3B9293965F60088A0D9 /* CGPath.swift in Sources */,
 				04BA916626DBFB4400014C93 /* Fourier.swift in Sources */,
 				04B5F38A2938C1AE0088A0D9 /* Int.swift in Sources */,
-				046203B52C2397C400AB6BD9 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

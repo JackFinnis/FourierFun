@@ -9,16 +9,19 @@ import SwiftUI
 import Vision
 import VectorPlus
 import SwiftSVG
+import ComplexModule
 
 @MainActor
 @Observable
 class Model {
-    var isDrawing = false
     var path: SwiftUI.Path?
     var epicycles = 10.0
     var points = [CGPoint]()
     var size = CGSize()
-    
+    var epicycleTerms: [(n: Int, cn: Complex<Double>)] = []
+    var penPoints: [CGPoint] = []
+    var speed = Speed.normal
+
     var nRange: ClosedRange<Double> {
         1...max(2, min(500, Double(max(points.count, 1))))
     }
@@ -27,6 +30,9 @@ class Model {
         epicycles = 10.0
         path = nil
         points = []
+        epicycleTerms = []
+        penPoints = []
+        speed = .normal
     }
     
     func render() {
@@ -37,26 +43,21 @@ class Model {
         guard let uiImage = renderer.uiImage,
               let pngData = uiImage.pngData()
         else { return }
-        try? pngData.write(to: Constants.shareURL)
+        try? pngData.write(to: .shareURL)
     }
     
-    func importSVG(result: Result<URL, Error>, size: CGSize) {
-        switch result {
-        case .failure(_): break
-        case .success(let url):
-            do {
-                _ = url.startAccessingSecurityScopedResource()
-                let svg = try SVG.make(from: url)
-                url.stopAccessingSecurityScopedResource()
-                
-                let cgPath = svg.path(size: .init(size))
-                let points = cgPath.copy(dashingWithPhase: 0, lengths: [2]).points
-                let scaledPoints = scale(points: points, size: size)
-                transform(points: scaledPoints, size: size)
-            } catch {
-                print(error)
-                return
-            }
+    func importSVG(url: URL, size: CGSize) {
+        do {
+            _ = url.startAccessingSecurityScopedResource()
+            let svg = try SVG.make(from: url)
+            url.stopAccessingSecurityScopedResource()
+            
+            let cgPath = svg.path(size: .init(size))
+            let points = cgPath.copy(dashingWithPhase: 0, lengths: [2]).points
+            let scaledPoints = scale(points: points, size: size)
+            transform(points: scaledPoints, size: size)
+        } catch {
+            print(error)
         }
     }
     
@@ -79,7 +80,6 @@ class Model {
 
         let targetWidth = size.width
         var targetHeight = size.height
-        targetHeight -= Constants.actionBarHeight
 
         let padding: CGFloat = 50
         let widthScale = (targetWidth - padding) / oldWidth
@@ -107,14 +107,20 @@ class Model {
     func update() {
         UIImpactFeedbackGenerator().impactOccurred()
         epicycles = min(epicycles, Double(points.count))
-        let points = Fourier.transform(N: Int(epicycles), points: points)
+        let transformed = Fourier.transform(N: Int(epicycles), points: points)
         path = Path { path in
-            path.move(to: CGPoint(x: points[0].x, y: points[0].y))
-            for i in 1..<points.count {
-                path.addLine(to: CGPoint(x: points[i].x, y: points[i].y))
+            path.move(to: CGPoint(x: transformed[0].x, y: transformed[0].y))
+            for i in 1..<transformed.count {
+                path.addLine(to: CGPoint(x: transformed[i].x, y: transformed[i].y))
             }
-            path.addLine(to: CGPoint(x: points[0].x, y: points[0].y))
+            path.addLine(to: CGPoint(x: transformed[0].x, y: transformed[0].y))
             path.closeSubpath()
+        }
+        epicycleTerms = Fourier.sortedTerms(N: Int(epicycles), points: points)
+        let resolution = 1000
+        penPoints = (0..<resolution).compactMap { step in
+            let t = Double(step) / Double(resolution)
+            return Fourier.arrowPositions(terms: epicycleTerms, t: t).last
         }
         render()
     }

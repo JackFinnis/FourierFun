@@ -56,4 +56,21 @@ struct Fourier {
         let approx = getApprox(N: N, path: path, cs: cs)
         return approx.map { CGPointMake($0.real, $0.imaginary) }
     }
+
+    static func sortedTerms(N: Int, points: [CGPoint]) -> [(n: Int, cn: Complex<Double>)] {
+        let path = points.map { Complex(Double($0.x), Double($0.y)) }
+        let cs = getCs(N: N, path: path)
+        return cs.sorted { $0.value.length > $1.value.length }.map { ($0.key, $0.value) }
+    }
+
+    static func arrowPositions(terms: [(n: Int, cn: Complex<Double>)], t: Double) -> [CGPoint] {
+        var positions = [CGPoint]()
+        var current: Complex<Double> = 0
+        positions.append(CGPoint(x: current.real, y: current.imaginary))
+        for (n, cn) in terms {
+            current += vector(cn: cn, t: t, n: n)
+            positions.append(CGPoint(x: current.real, y: current.imaginary))
+        }
+        return positions
+    }
 }

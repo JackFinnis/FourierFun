@@ -21,12 +21,14 @@ struct ContentView: View {
     @Environment(\.requestReview) var requestReview
     @AppStorage("featuresUsed") var featuresUsed = 0
     @State var model = Model()
+    @State var isDrawing = false
+    @State var isAnimating = false
     @State var showFileImporter = false
     
     var title: String {
         if model.path == nil {
             return "Fourier"
-        } else if model.isDrawing {
+        } else if isDrawing {
             return ""
         } else {
             return Int(model.epicycles).formatted(singular: "Epicycle")
@@ -44,10 +46,15 @@ struct ContentView: View {
                 ZStack {
                     Rectangle()
                         .fill(.background)
-                    
+
                     if let path = model.path {
-                        PathRenderer(path: path)
-                            .ignoresSafeArea()
+                        if isAnimating {
+                            EpicycleView(model: model)
+                                .ignoresSafeArea()
+                        } else {
+                            PathRenderer(path: path)
+                                .ignoresSafeArea()
+                        }
                     } else {
                         Image(systemName: "hand.draw.fill")
                             .font(.largeTitle)
@@ -59,7 +66,8 @@ struct ContentView: View {
                     DragGesture(minimumDistance: 0, coordinateSpace: .global)
                         .onChanged { value in
                             if value.location == value.startLocation {
-                                model.isDrawing = true
+                                isDrawing = true
+                                isAnimating = false
                                 model.path = Path()
                                 model.path?.move(to: value.location)
                             } else {
@@ -67,7 +75,7 @@ struct ContentView: View {
                             }
                         }
                         .onEnded { _ in
-                            model.isDrawing = false
+                            isDrawing = false
                             guard let path = model.path else { return }
                             let points = path.cgPath.copy(dashingWithPhase: 0, lengths: [10]).points
                             model.transform(points: points, size: size)
@@ -113,7 +121,7 @@ struct ContentView: View {
                                 Section("See Examples") {
                                     ForEach(ExampleFile.allCases, id: \.self) { file in
                                         Button {
-                                            model.importSVG(result: .success(file.url), size: size)
+                                            model.importSVG(url: file.url, size: size)
                                         } label: {
                                             Label(file.name, systemImage: file.systemImage)
                                         }
@@ -124,19 +132,38 @@ struct ContentView: View {
                             }
                             .menuOrder(.fixed)
                             .fileImporter(isPresented: $showFileImporter, allowedContentTypes: [.svg]) { result in
-                                model.importSVG(result: result, size: size)
+                                switch result {
+                                case .success(let url):
+                                    model.importSVG(url: url, size: size)
+                                case .failure(let error):
+                                    print(error)
+                                }
                             }
                         }
-                    } else if !model.isDrawing {
-                        ToolbarItem(placement: .topBarLeading) {
+                    } else if !isDrawing {
+                        ToolbarItem(placement: .cancellationAction) {
                             Button {
                                 model.reset()
+                                isAnimating = false
                             } label: {
                                 Label("Reset", systemImage: "xmark")
                             }
                         }
-                        ToolbarItem(placement: .topBarTrailing) {
-                            ShareLink(item: Constants.shareURL)
+                        ToolbarItemGroup(placement: .primaryAction) {
+                            if isAnimating {
+                                Button {
+                                    model.speed = model.speed.next
+                                } label: {
+                                    Text(model.speed.label)
+                                        .monospacedDigit()
+                                }
+                            }
+                            Button {
+                                isAnimating.toggle()
+                            } label: {
+                                Label(isAnimating ? "Pause" : "Play", systemImage: isAnimating ? "stop.fill" : "play.fill")
+                            }
+                            ShareLink(item: .shareURL)
                         }
                         ToolbarItem(placement: .bottomBar) {
                             Slider(value: $model.epicycles, in: model.nRange, step: 1) { isSliding in
@@ -173,12 +200,4 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-}
-
-struct PathRenderer: View {
-    let path: Path
-    
-    var body: some View {
-        path.stroke(Color.accentColor, style: .init(lineWidth: 3, lineCap: .round, lineJoin: .round))
-    }
 }

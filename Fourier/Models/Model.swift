@@ -10,14 +10,12 @@ import Vision
 import VectorPlus
 import SwiftSVG
 import ComplexModule
-import ImageIO
-import UniformTypeIdentifiers
 
 @MainActor
 @Observable
 class Model {
     var path: SwiftUI.Path?
-    var epicycles = 10.0
+    var epicycles: Double = 10
     var points = [CGPoint]()
     var size = CGSize()
     var epicycleTerms: [(n: Int, cn: Complex<Double>)] = []
@@ -28,62 +26,17 @@ class Model {
     var isAnimating = false
 
     var nRange: ClosedRange<Double> {
-        1...max(2, min(500, Double(max(points.count, 1))))
+        1...min(500, Double(max(points.count, 2)))
     }
     
     func reset() {
-        epicycles = 10.0
+        epicycles = 10
         path = nil
         points = []
         epicycleTerms = []
         penPoints = []
         speed = .normal
         isAnimating = false
-    }
-    
-    func renderPNG() {
-        guard let path else { return }
-        let content = PathView(path: path).background(.background)
-        let renderer = ImageRenderer(content: content)
-        renderer.proposedSize = .init(size)
-        renderer.scale = 3
-        guard let uiImage = renderer.uiImage,
-              let pngData = uiImage.pngData()
-        else { return }
-        try? pngData.write(to: .sharePNG)
-    }
-
-    func renderGIF() {
-        let fps = 30.0
-        let delayTime = 1.0 / fps
-        let frameCount = Int(speed.duration * fps)
-
-        guard let destination = CGImageDestinationCreateWithURL(
-            URL.shareGIF as CFURL,
-            UTType.gif.identifier as CFString,
-            frameCount,
-            nil
-        ) else { return }
-
-        CGImageDestinationSetProperties(destination, [
-            kCGImagePropertyGIFDictionary: [kCGImagePropertyGIFLoopCount: 0]
-        ] as CFDictionary)
-
-        let frameProperties = [
-            kCGImagePropertyGIFDictionary: [kCGImagePropertyGIFDelayTime: delayTime]
-        ] as CFDictionary
-
-        for frame in 0..<frameCount {
-            let t = Double(frame) / Double(frameCount)
-            let content = EpicycleFrame(model: self, t: t).background(.background)
-            let renderer = ImageRenderer(content: content)
-            renderer.proposedSize = .init(size)
-            renderer.scale = 3
-            guard let cgImage = renderer.cgImage else { continue }
-            CGImageDestinationAddImage(destination, cgImage, frameProperties)
-        }
-
-        CGImageDestinationFinalize(destination)
     }
     
     func importSVG(url: URL, size: CGSize) {
@@ -119,7 +72,7 @@ class Model {
         let oldHeight = maxy - miny
 
         let targetWidth = size.width
-        var targetHeight = size.height
+        let targetHeight = size.height
 
         let padding: CGFloat = 50
         let widthScale = (targetWidth - padding) / oldWidth
@@ -162,7 +115,6 @@ class Model {
             let t = Double(step) / Double(resolution)
             return Fourier.arrowPositions(terms: epicycleTerms, t: t).last
         }
-        renderPNG()
     }
 }
 

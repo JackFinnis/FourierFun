@@ -13,13 +13,10 @@ struct ContentView: View {
     @AppStorage("featuresUsed") var featuresUsed = 0
     @State var model = Model()
     @State var showFileImporter = false
-    @State var showExport = false
 
     var title: String {
-        if model.path == nil {
+        if model.path == nil || model.isDrawing {
             return "Fourier"
-        } else if model.isDrawing {
-            return ""
         } else {
             return Int(model.epicycles).formatted(singular: "Epicycle")
         }
@@ -40,10 +37,8 @@ struct ContentView: View {
                     if let path = model.path {
                         if model.isAnimating {
                             EpicycleView(model: model)
-                                .ignoresSafeArea()
                         } else {
-                            PathView(path: path)
-                                .ignoresSafeArea()
+                            path.stroke(.accent, style: .init(lineWidth: 3, lineCap: .round, lineJoin: .round))
                         }
                     } else {
                         Image(systemName: "hand.draw.fill")
@@ -52,12 +47,15 @@ struct ContentView: View {
                             .foregroundStyle(.secondary)
                     }
                 }
+                .ignoresSafeArea()
                 .gesture(
                     DragGesture(minimumDistance: 0, coordinateSpace: .global)
                         .onChanged { value in
                             if value.location == value.startLocation {
                                 model.isDrawing = true
                                 model.isAnimating = false
+                                model.points = []
+                                model.epicycles = 2
                                 model.path = Path()
                                 model.path?.move(to: value.location)
                             } else {
@@ -156,19 +154,6 @@ struct ContentView: View {
                                 model.isAnimating.toggle()
                             } label: {
                                 Label(model.isAnimating ? "Stop" : "Play", systemImage: model.isAnimating ? "stop.fill" : "play.fill")
-                            }
-                        }
-                        ToolbarItem(placement: .primaryAction) {
-                            Button {
-                                model.renderPNG()
-                                model.renderGIF()
-                                showExport = true
-                            } label: {
-                                Label("Export", systemImage: "square.and.arrow.up")
-                            }
-                            .confirmationDialog("Export", isPresented: $showExport) {
-                                ShareLink("Image", item: .sharePNG)
-                                ShareLink("Video", item: .shareGIF)
                             }
                         }
                         ToolbarItem(placement: .bottomBar) {

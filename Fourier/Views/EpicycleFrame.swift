@@ -7,6 +7,7 @@ import SwiftUI
 import ComplexModule
 
 struct EpicycleFrame: View {
+    @Environment(\.colorScheme) var colorScheme
     let model: Model
     let t: Double
     var firstCycleComplete = true
@@ -22,7 +23,7 @@ struct EpicycleFrame: View {
                 let style = StrokeStyle(lineWidth: 3, lineCap: .round, lineJoin: .round)
 
                 let accent = Color.accentColor
-                let bg = Color.white
+                let bg: Color = colorScheme == .dark ? .black : .white
 
                 // Draw oldest segments first so newest appear on top
                 for age in stride(from: totalPoints - 1, through: 0, by: -1) {

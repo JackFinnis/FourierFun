@@ -21,6 +21,4 @@ struct FourierApp: App {
     ContentView()
 }
 
-// treble clef goes into safe area
 // more svgs: repeating patterns, skyline
-//

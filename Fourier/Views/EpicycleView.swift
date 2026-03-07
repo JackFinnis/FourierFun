@@ -15,16 +15,11 @@ struct EpicycleView: View {
     var body: some View {
         TimelineView(.animation) { timeline in
             let elapsed = timeline.date.timeIntervalSince(startDate)
-            let t = fmod(elapsed / model.speed.duration, 1.0)
-            EpicycleFrame(model: model, t: t, firstCycleComplete: elapsed >= model.speed.duration)
+            let t = fmod(elapsed / 30, 1.0)
+            EpicycleFrame(model: model, t: t)
         }
         .onAppear {
             startDate = .now
-        }
-        .onChange(of: model.speed) { oldSpeed, newSpeed in
-            let elapsed = Date.now.timeIntervalSince(startDate)
-            let t = fmod(elapsed / oldSpeed.duration, 1.0)
-            startDate = Date.now.addingTimeInterval(-t * newSpeed.duration)
         }
     }
 }

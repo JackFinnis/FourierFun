@@ -14,7 +14,7 @@ enum Speed: CaseIterable {
 
     var duration: Double {
         switch self {
-        case .slow:     20
+        case .slow:     30
         case .normal:   10
         case .fast:     5
         }

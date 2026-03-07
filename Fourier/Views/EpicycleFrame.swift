@@ -10,7 +10,6 @@ struct EpicycleFrame: View {
     @Environment(\.colorScheme) var colorScheme
     let model: Model
     let t: Double
-    var firstCycleComplete = true
 
     var body: some View {
         let positions = Fourier.arrowPositions(terms: model.epicycleTerms, t: t)
@@ -30,7 +29,6 @@ struct EpicycleFrame: View {
                     let i = (penIdx - age + totalPoints) % totalPoints
                     let fraction = 1.0 - Double(age) / Double(totalPoints)
 
-                    if !firstCycleComplete && age > penIdx { continue }
                     guard fraction > 0.01 else { continue }
 
                     var line = Path()

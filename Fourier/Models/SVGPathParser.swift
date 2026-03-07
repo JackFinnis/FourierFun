@@ -10,7 +10,7 @@ import CoreGraphics
 import VectorPlus
 import SwiftSVG
 
-enum SVGPathParser {
+struct SVGPathParser {
     static func cgPath(from svg: SVG) -> CGPath? {
         guard let data = firstPathData(in: svg) else { return nil }
         return parse(data).largestSubpath

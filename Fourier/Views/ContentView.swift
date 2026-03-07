@@ -12,6 +12,11 @@ struct ContentView: View {
     @Environment(\.requestReview) var requestReview
     @AppStorage("featuresUsed") var featuresUsed = 0
     @State var model = Model()
+    @State var progressiveStartDate = Date.now
+
+    init() {
+        UINavigationBar.appearance().titleTextAttributes = [.font : UIFont.headline]
+    }
 
     var title: String {
         if model.path == nil || model.isDrawing {
@@ -54,6 +59,7 @@ struct ContentView: View {
                             if value.location == value.startLocation {
                                 model.isDrawing = true
                                 model.isAnimating = false
+                                model.isProgressive = false
                                 model.points = []
                                 model.epicycles = 2
                                 model.path = Path()
@@ -66,17 +72,11 @@ struct ContentView: View {
                             model.isDrawing = false
                             guard let path = model.path else { return }
                             let points = path.cgPath.samplePoints()
-                            model.transform(points: points, size: size)
+                            model.analyze(points: points, size: size)
                         }
                 )
+                .navigationTitle(title)
                 .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .principal) {
-                        Text(title)
-                            .font(.headline)
-                            .monospacedDigit()
-                    }
-                }
                 .toolbarTitleMenu {
                     Link(destination: URL(string: "https://youtu.be/r6sGWTCMz2k")!) {
                         Text("But what is a Fourier series?")
@@ -120,40 +120,42 @@ struct ContentView: View {
                             }
                         }
                         ToolbarItemGroup(placement: .primaryAction) {
-                            if model.isAnimating {
-                                Button {
-                                    model.speed = model.speed.next
-                                } label: {
-                                    Text(model.speed.label)
-                                        .monospacedDigit()
-                                }
-                            }
                             Button {
                                 model.isAnimating.toggle()
                             } label: {
                                 Label(model.isAnimating ? "Stop" : "Play", systemImage: model.isAnimating ? "stop.fill" : "play.fill")
                             }
                         }
-                        ToolbarItem(placement: .bottomBar) {
-                            Slider(value: $model.epicycles, in: model.nRange, step: 1) { isSliding in
-                                if !isSliding { model.update() }
+                        ToolbarItemGroup(placement: .bottomBar) {
+                            Button {
+                                model.isProgressive.toggle()
+                                progressiveStartDate = .now
+                            } label: {
+                                Label("Progressive", systemImage: model.isProgressive ? "stop.fill" : "play.fill")
                             }
-                            .padding(.horizontal, 10)
-                        }
-                        ToolbarSpacer(placement: .bottomBar)
-                        ToolbarItem(placement: .bottomBar) {
-                            Stepper("Epicycles", value: $model.epicycles, in: model.nRange) { isStepping in
-                                if !isStepping { model.update() }
-                            }
-                            .font(.headline)
-                            .labelsHidden()
-                            .padding(.horizontal, 5)
+                            Slider(value: $model.epicycles, in: model.nRange, step: 1)
+                                .disabled(model.isProgressive)
+                            Stepper("Epicycles", value: $model.epicycles, in: model.nRange)
+                                .disabled(model.isProgressive)
+                                .labelsHidden()
+                                .padding(.trailing, 4)
                         }
                     }
                 }
             }
         }
         .monospacedDigit()
+        .onReceive(Timer.publish(every: 1.0/30, on: .main, in: .common).autoconnect()) { _ in
+            guard model.isProgressive else { return }
+            let upperBound = model.nRange.upperBound
+            let elapsed = Date.now.timeIntervalSince(progressiveStartDate)
+            let cycle = fmod(elapsed / 30, 2)
+            let t = cycle < 1 ? cycle : 2 - cycle
+            model.epicycles = max(1, round(1 + t * t * (upperBound - 1)))
+        }
+        .onChange(of: model.epicycles) {
+            model.updatePath()
+        }
         .onChange(of: model.path) { _, _ in
             if model.path == nil {
                 featuresUsed += 1

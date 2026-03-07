@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		04159B792F5C945A00752ADC /* SVGPathParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04159B782F5C945A00752ADC /* SVGPathParser.swift */; };
 		04159B7B2F5CAE2500752ADC /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04159B7A2F5CAE2500752ADC /* Array.swift */; };
+		04159B7F2F5CB35200752ADC /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04159B7E2F5CB35200752ADC /* UIFont.swift */; };
 		0441C9DC2EA0458A007B4243 /* Fourier.icon in Resources */ = {isa = PBXBuildFile; fileRef = 0441C9DB2EA0458A007B4243 /* Fourier.icon */; };
 		049BDA1A2C4E79DA00652F71 /* VectorPlus in Frameworks */ = {isa = PBXBuildFile; productRef = 049BDA192C4E79DA00652F71 /* VectorPlus */; };
 		049BDA252C4E85A300652F71 /* ExampleFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049BDA242C4E85A300652F71 /* ExampleFile.swift */; };
@@ -29,6 +30,7 @@
 /* Begin PBXFileReference section */
 		04159B782F5C945A00752ADC /* SVGPathParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGPathParser.swift; sourceTree = "<group>"; };
 		04159B7A2F5CAE2500752ADC /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
+		04159B7E2F5CB35200752ADC /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		0441C9DB2EA0458A007B4243 /* Fourier.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = Fourier.icon; sourceTree = "<group>"; };
 		049BDA242C4E85A300652F71 /* ExampleFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleFile.swift; sourceTree = "<group>"; };
 		04A6557E293D24450084CC6A /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 				04B5F3B8293965F60088A0D9 /* CGPath.swift */,
 				04A6557E293D24450084CC6A /* Collection.swift */,
 				04B5F3892938C1AE0088A0D9 /* Int.swift */,
+				04159B7E2F5CB35200752ADC /* UIFont.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -224,6 +227,7 @@
 				049BDA252C4E85A300652F71 /* ExampleFile.swift in Sources */,
 				04A6557F293D24450084CC6A /* Collection.swift in Sources */,
 				04B5F3B9293965F60088A0D9 /* CGPath.swift in Sources */,
+				04159B7F2F5CB35200752ADC /* UIFont.swift in Sources */,
 				04159B792F5C945A00752ADC /* SVGPathParser.swift in Sources */,
 				04E6182C2F5BB02D0019EE9B /* ContentView.swift in Sources */,
 				04159B7B2F5CAE2500752ADC /* Array.swift in Sources */,

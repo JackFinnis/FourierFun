@@ -10,57 +10,44 @@ import ComplexModule
 import SwiftUI
 
 struct Fourier {
-    static func integrand(path: [Complex<Double>], t: Int, n: Int) -> Complex<Double> {
-        Complex.exp(Complex(Double(n)) * Complex(imaginary: -2) * Complex(Double.pi) * Complex(Double(t)/Double(path.count))) * path[t]
-    }
-    
-    static func integral(path: [Complex<Double>], n: Int) -> Complex<Double> {
-        var integral: Complex<Double> = 0
-        for t in 0..<path.count {
-            integral += integrand(path: path, t: t, n: n) * Complex(1/Double(path.count))
-        }
-        return integral
-    }
-
-    static func getCs(N: Int, path: [Complex<Double>]) -> [Int: Complex<Double>] {
+    static func coefficients(path: [Complex<Double>]) -> [Int: Complex<Double>] {
         var cs: [Int: Complex<Double>] = [:]
-        for n in nRange(N: N) {
-            cs[n] = integral(path: path, n: n)
+        for n in nRange(N: path.count) {
+            var integral: Complex<Double> = 0
+            for t in 0..<path.count {
+                let e = Complex.exp(Complex(Double(n)) * Complex(imaginary: -2) * Complex(Double.pi) * Complex(Double(t) / Double(path.count)))
+                integral += e * path[t] * Complex(1 / Double(path.count))
+            }
+            cs[n] = integral
         }
         return cs
     }
 
     static func nRange(N: Int) -> Range<Int> {
-        Int((Double(-N)/2).rounded(.up))..<Int((Double(N)/2).rounded(.up))
+        Int((Double(-N) / 2).rounded(.up))..<Int((Double(N) / 2).rounded(.up))
     }
 
-    static func vector(cn: Complex<Double>, t: Double, n: Int) -> Complex<Double> {
-        cn * Complex.exp(Complex(Double(n)) * Complex(imaginary: 2) * Complex(Double.pi) * Complex(t))
-    }
-
-    static func getApprox(N: Int, path: [Complex<Double>], cs: [Int: Complex<Double>]) -> [Complex<Double>] {
-        var approx = [Complex<Double>]()
-        for t in 0..<path.count {
-            var vectorSum: Complex<Double> = 0
-            for n in nRange(N: N) {
-                vectorSum += vector(cn: cs[n]!, t: Double(t)/Double(path.count), n: n)
+    static func penPoints(coefficients: [Int: Complex<Double>], count: Int, resolution: Int) -> [[CGPoint]] {
+        let maxN = min(300, count)
+        var running = Array(repeating: CGPoint.zero, count: resolution)
+        var result = [running]
+        var prevRange: Range<Int> = 0..<0
+        for n in 1...maxN {
+            let newRange = nRange(N: n)
+            for i in newRange where !prevRange.contains(i) {
+                if let cn = coefficients[i] {
+                    for j in 0..<resolution {
+                        let t = Double(j) / Double(resolution)
+                        let v = vector(cn: cn, t: t, n: i)
+                        running[j].x += v.real
+                        running[j].y += v.imaginary
+                    }
+                }
             }
-            approx.append(vectorSum)
+            result.append(running)
+            prevRange = newRange
         }
-        return approx
-    }
-    
-    static func transform(N: Int, points: [CGPoint]) -> [CGPoint] {
-        let path = points.map { Complex(Double($0.x), Double($0.y)) }
-        let cs = getCs(N: N, path: path)
-        let approx = getApprox(N: N, path: path, cs: cs)
-        return approx.map { CGPointMake($0.real, $0.imaginary) }
-    }
-
-    static func sortedTerms(N: Int, points: [CGPoint]) -> [(n: Int, cn: Complex<Double>)] {
-        let path = points.map { Complex(Double($0.x), Double($0.y)) }
-        let cs = getCs(N: N, path: path)
-        return cs.sorted { $0.value.length > $1.value.length }.map { ($0.key, $0.value) }
+        return result
     }
 
     static func arrowPositions(terms: [(n: Int, cn: Complex<Double>)], t: Double) -> [CGPoint] {
@@ -72,5 +59,9 @@ struct Fourier {
             positions.append(CGPoint(x: current.real, y: current.imaginary))
         }
         return positions
+    }
+
+    private static func vector(cn: Complex<Double>, t: Double, n: Int) -> Complex<Double> {
+        cn * Complex.exp(Complex(Double(n)) * Complex(imaginary: 2) * Complex(Double.pi) * Complex(t))
     }
 }

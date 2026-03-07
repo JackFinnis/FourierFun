@@ -17,39 +17,47 @@ class Model {
     var epicycles: Double = 10
     var points = [CGPoint]()
     var size = CGSize()
+    var allCoefficients: [Int: Complex<Double>] = [:]
+
+    var allPenPoints: [[CGPoint]] = []
     var epicycleTerms: [(n: Int, cn: Complex<Double>)] = []
     var penPoints: [CGPoint] = []
-    var speed = Speed.normal
     var isDrawing = false
     var isAnimating = false
+    var isProgressive = false
+    var progressiveDirection = 1
 
     var nRange: ClosedRange<Double> {
-        1...min(500, Double(max(points.count, 2)))
+        1...min(300, Double(max(points.count, 2)))
     }
-    
+
     func reset() {
         epicycles = 10
         path = nil
         points = []
+        allCoefficients = [:]
+
+        allPenPoints = []
         epicycleTerms = []
         penPoints = []
-        speed = .normal
         isAnimating = false
+        isProgressive = false
+        progressiveDirection = 1
     }
-    
+
     func importSVG(url: URL, size: CGSize, insets: EdgeInsets) {
         do {
             let svg = try SVG.make(from: url)
             guard let cgPath = SVGPathParser.cgPath(from: svg) else { return }
             let points = cgPath.samplePoints()
-            let scaledPoints = scale(points: points, size: size, insets: insets)
-            transform(points: scaledPoints, size: size)
+            let scaledPoints = scaleToFit(points: points, size: size, insets: insets)
+            analyze(points: scaledPoints, size: size)
         } catch {
             print(error)
         }
     }
 
-    func scale(points: [CGPoint], size: CGSize, insets: EdgeInsets) -> [CGPoint] {
+    func scaleToFit(points: [CGPoint], size: CGSize, insets: EdgeInsets) -> [CGPoint] {
         let bounds = points.bounds
         let padding: CGFloat = 20
         let safe = CGRect(
@@ -63,33 +71,34 @@ class Model {
         let dy = safe.midY - bounds.midY * scale
         return points.map { CGPoint(x: $0.x * scale + dx, y: $0.y * scale + dy) }
     }
-    
-    func transform(points: [CGPoint], size: CGSize) {
-        print(points.count)
+
+    func analyze(points: [CGPoint], size: CGSize) {
         self.size = size
         reset()
         guard points.count > 1 else { return }
         self.points = points
-        update()
+        let complexPath = points.map { Complex(Double($0.x), Double($0.y)) }
+        allCoefficients = Fourier.coefficients(path: complexPath)
+        allPenPoints = Fourier.penPoints(coefficients: allCoefficients, count: points.count, resolution: points.count)
+        updatePath()
     }
-    
-    func update() {
-        UIImpactFeedbackGenerator().impactOccurred()
+
+    func updatePath() {
         epicycles = min(epicycles, Double(points.count))
-        let transformed = Fourier.transform(N: Int(epicycles), points: points)
-        path = Path { path in
-            path.move(to: CGPoint(x: transformed[0].x, y: transformed[0].y))
-            for i in 1..<transformed.count {
-                path.addLine(to: CGPoint(x: transformed[i].x, y: transformed[i].y))
-            }
-            path.addLine(to: CGPoint(x: transformed[0].x, y: transformed[0].y))
-            path.closeSubpath()
+        let n = min(Int(epicycles), allPenPoints.count - 1)
+        guard n >= 0 else { return }
+        penPoints = allPenPoints[n]
+        let terms = Fourier.nRange(N: Int(epicycles)).compactMap { n in
+            allCoefficients[n].map { (n: n, cn: $0) }
         }
-        epicycleTerms = Fourier.sortedTerms(N: Int(epicycles), points: points)
-        let resolution = points.count
-        penPoints = (0..<resolution).compactMap { step in
-            let t = Double(step) / Double(resolution)
-            return Fourier.arrowPositions(terms: epicycleTerms, t: t).last
+        epicycleTerms = terms.sorted { $0.cn.length > $1.cn.length }
+        path = Path { path in
+            guard let first = penPoints.first else { return }
+            path.move(to: first)
+            for point in penPoints.dropFirst() {
+                path.addLine(to: point)
+            }
+            path.closeSubpath()
         }
     }
 }

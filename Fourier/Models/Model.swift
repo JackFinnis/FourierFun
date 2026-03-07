@@ -20,7 +20,6 @@ class Model {
     var epicycleTerms: [(n: Int, cn: Complex<Double>)] = []
     var penPoints: [CGPoint] = []
     var speed = Speed.normal
-
     var isDrawing = false
     var isAnimating = false
 
@@ -38,51 +37,31 @@ class Model {
         isAnimating = false
     }
     
-    func importSVG(url: URL, size: CGSize) {
+    func importSVG(url: URL, size: CGSize, insets: EdgeInsets) {
         do {
             let svg = try SVG.make(from: url)
             guard let cgPath = SVGPathParser.cgPath(from: svg) else { return }
             let points = cgPath.samplePoints()
-            let scaledPoints = scale(points: points, size: size)
+            let scaledPoints = scale(points: points, size: size, insets: insets)
             transform(points: scaledPoints, size: size)
         } catch {
             print(error)
         }
     }
-    
-    func scale(points: [CGPoint], size: CGSize) -> [CGPoint] {
-        let xs = points.compactMap { $0.x }
-        let ys = points.compactMap { $0.y }
 
-        let minx = xs.min() ?? 0
-        let miny = ys.min() ?? 0
-        let maxx = xs.max() ?? 0
-        let maxy = ys.max() ?? 0
-
-        let transform = CGAffineTransform(translationX: -minx, y: -miny)
-        let shifted = points.map { point in
-            point.applying(transform)
-        }
-
-        let oldWidth = maxx - minx
-        let oldHeight = maxy - miny
-
-        let targetWidth = size.width
-        let targetHeight = size.height
-
-        let padding: CGFloat = 50
-        let widthScale = (targetWidth - padding) / oldWidth
-        let heightScale = (targetHeight - padding) / oldHeight
-        let scale = widthScale < heightScale ? widthScale : heightScale
-
-        let newWidth = oldWidth * scale
-        let newHeight = oldHeight * scale
-        let widthOffset = (targetWidth - newWidth)/2
-        let heightOffset = (targetHeight - newHeight)/2
-
-        return shifted.map { point in
-            CGPointMake(point.x * scale + widthOffset, point.y * scale + heightOffset)
-        }
+    func scale(points: [CGPoint], size: CGSize, insets: EdgeInsets) -> [CGPoint] {
+        let bounds = points.bounds
+        let padding: CGFloat = 20
+        let safe = CGRect(
+            x: insets.leading + padding,
+            y: insets.top + padding,
+            width: size.width - insets.leading - insets.trailing - padding * 2,
+            height: size.height - insets.top - insets.bottom - padding * 2
+        )
+        let scale = min(safe.width / bounds.width, safe.height / bounds.height)
+        let dx = safe.midX - bounds.midX * scale
+        let dy = safe.midY - bounds.midY * scale
+        return points.map { CGPoint(x: $0.x * scale + dx, y: $0.y * scale + dy) }
     }
     
     func transform(points: [CGPoint], size: CGSize) {

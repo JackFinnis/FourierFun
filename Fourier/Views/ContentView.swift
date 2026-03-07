@@ -24,9 +24,10 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             GeometryReader { geo in
+                let insets = geo.safeAreaInsets
                 let size = CGSize(
-                    width: geo.size.width + geo.safeAreaInsets.leading + geo.safeAreaInsets.trailing,
-                    height: geo.size.height + geo.safeAreaInsets.top + geo.safeAreaInsets.bottom
+                    width: geo.size.width + insets.leading + insets.trailing,
+                    height: geo.size.height + insets.top + insets.bottom
                 )
 
                 ZStack {
@@ -68,6 +69,7 @@ struct ContentView: View {
                             model.transform(points: points, size: size)
                         }
                 )
+                .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .principal) {
                         Text(title)
@@ -104,7 +106,7 @@ struct ContentView: View {
                             Menu("Examples") {
                                 ForEach(ExampleFile.allCases, id: \.self) { file in
                                     Button(file.name) {
-                                        model.importSVG(url: file.url, size: size)
+                                        model.importSVG(url: file.url, size: size, insets: insets)
                                     }
                                 }
                             }

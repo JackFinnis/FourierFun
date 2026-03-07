@@ -16,7 +16,7 @@ struct EpicycleView: View {
         TimelineView(.animation) { timeline in
             let elapsed = timeline.date.timeIntervalSince(startDate)
             let t = fmod(elapsed / model.speed.duration, 1.0)
-            EpicycleFrame(model: model, t: t)
+            EpicycleFrame(model: model, t: t, firstCycleComplete: elapsed >= model.speed.duration)
         }
         .onAppear {
             startDate = .now

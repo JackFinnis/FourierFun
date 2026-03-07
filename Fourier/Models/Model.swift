@@ -23,7 +23,7 @@ class Model {
     var epicycleTerms: [(n: Int, cn: Complex<Double>)] = []
     var penPoints: [CGPoint] = []
     var speed = Speed.normal
-    var showEpicycles = true
+
     var isDrawing = false
     var isAnimating = false
 

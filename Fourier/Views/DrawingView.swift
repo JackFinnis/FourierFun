@@ -41,12 +41,6 @@ struct DrawingView: View {
                             Text(model.speed.label)
                                 .monospacedDigit()
                         }
-                        Button {
-                            model.showEpicycles.toggle()
-                        } label: {
-                            Label("Show Epicycles", systemImage: "circle.circle")
-                                .symbolVariant(model.showEpicycles ? .fill : .none)
-                        }
                     }
                     Button {
                         model.isAnimating.toggle()

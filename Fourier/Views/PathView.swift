@@ -8,7 +8,7 @@
 import SwiftUI
 import StoreKit
 
-struct PathRenderer: View {
+struct PathView: View {
     let path: Path
     
     var body: some View {

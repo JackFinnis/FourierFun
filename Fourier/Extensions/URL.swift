@@ -8,5 +8,6 @@
 import Foundation
 
 extension URL {
-    static let shareURL = URL.temporaryDirectory.appending(path: "Fourier.png")
+    static let sharePNG = URL.temporaryDirectory.appending(path: "Fourier.png")
+    static let shareGIF = URL.temporaryDirectory.appending(path: "Fourier.gif")
 }

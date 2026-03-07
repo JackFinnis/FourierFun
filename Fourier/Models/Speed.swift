@@ -16,15 +16,15 @@ enum Speed: CaseIterable {
         switch self {
         case .slow:     20
         case .normal:   10
-        case .fast:     5
+        case .fast:     4
         }
     }
 
     var label: String {
         switch self {
-        case .slow:     "0.5x"
-        case .normal:   "1x"
-        case .fast:     "2x"
+        case .slow:     "1x"
+        case .normal:   "2x"
+        case .fast:     "5x"
         }
     }
 
@@ -35,4 +35,8 @@ enum Speed: CaseIterable {
         case .fast:     .slow
         }
     }
+}
+
+#Preview {
+    ContentView()
 }

@@ -133,12 +133,14 @@ struct ContentView: View {
                             } label: {
                                 Label("Progressive", systemImage: model.isProgressive ? "stop.fill" : "play.fill")
                             }
-                            Slider(value: $model.epicycles, in: model.nRange, step: 1)
-                                .disabled(model.isProgressive)
-                            Stepper("Epicycles", value: $model.epicycles, in: model.nRange)
-                                .disabled(model.isProgressive)
-                                .labelsHidden()
-                                .padding(.trailing, 4)
+                            Slider(value: $model.epicycles, in: model.nRange, step: 1) { isSliding in
+                                model.isProgressive = false
+                            }
+                            Stepper("Epicycles", value: $model.epicycles, in: model.nRange) { isStepping in
+                                model.isProgressive = false
+                            }
+                            .labelsHidden()
+                            .padding(.trailing, 4)
                         }
                     }
                 }

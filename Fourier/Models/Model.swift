@@ -110,7 +110,7 @@ class Model {
             path.closeSubpath()
         }
         epicycleTerms = Fourier.sortedTerms(N: Int(epicycles), points: points)
-        let resolution = 1000
+        let resolution = points.count
         penPoints = (0..<resolution).compactMap { step in
             let t = Double(step) / Double(resolution)
             return Fourier.arrowPositions(terms: epicycleTerms, t: t).last

@@ -3,18 +3,16 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		0441C9DC2EA0458A007B4243 /* Fourier.icon in Resources */ = {isa = PBXBuildFile; fileRef = 0441C9DB2EA0458A007B4243 /* Fourier.icon */; };
-		046203B72C23A7EC00AB6BD9 /* pi.svg in Resources */ = {isa = PBXBuildFile; fileRef = 046203B62C23A7EC00AB6BD9 /* pi.svg */; };
 		049BDA1A2C4E79DA00652F71 /* VectorPlus in Frameworks */ = {isa = PBXBuildFile; productRef = 049BDA192C4E79DA00652F71 /* VectorPlus */; };
 		049BDA252C4E85A300652F71 /* ExampleFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049BDA242C4E85A300652F71 /* ExampleFile.swift */; };
 		04A6557F293D24450084CC6A /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A6557E293D24450084CC6A /* Collection.swift */; };
 		04B5F38A2938C1AE0088A0D9 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B5F3892938C1AE0088A0D9 /* Int.swift */; };
 		04B5F3B9293965F60088A0D9 /* CGPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B5F3B8293965F60088A0D9 /* CGPath.swift */; };
-		04B5F3BB293A16520088A0D9 /* fourier.svg in Resources */ = {isa = PBXBuildFile; fileRef = 04B5F3BA293A16520088A0D9 /* fourier.svg */; };
 		04BA916026DB9FE600014C93 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BA915F26DB9FE600014C93 /* Model.swift */; };
 		04BA916626DBFB4400014C93 /* Fourier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BA916526DBFB4400014C93 /* Fourier.swift */; };
 		04BA916926DC008900014C93 /* ComplexModule in Frameworks */ = {isa = PBXBuildFile; productRef = 04BA916826DC008900014C93 /* ComplexModule */; };
@@ -28,12 +26,10 @@
 
 /* Begin PBXFileReference section */
 		0441C9DB2EA0458A007B4243 /* Fourier.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = Fourier.icon; sourceTree = "<group>"; };
-		046203B62C23A7EC00AB6BD9 /* pi.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = pi.svg; sourceTree = "<group>"; };
 		049BDA242C4E85A300652F71 /* ExampleFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleFile.swift; sourceTree = "<group>"; };
 		04A6557E293D24450084CC6A /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		04B5F3892938C1AE0088A0D9 /* Int.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		04B5F3B8293965F60088A0D9 /* CGPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPath.swift; sourceTree = "<group>"; };
-		04B5F3BA293A16520088A0D9 /* fourier.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = fourier.svg; sourceTree = "<group>"; };
 		04BA915F26DB9FE600014C93 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		04BA916526DBFB4400014C93 /* Fourier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fourier.swift; sourceTree = "<group>"; };
 		04E6181D2F5B558F0019EE9B /* EpicycleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpicycleView.swift; sourceTree = "<group>"; };
@@ -45,6 +41,10 @@
 		04FCE2D526D50470001D1BE8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04FCE2DA26D50470001D1BE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		04159B732F5C899600752ADC /* Examples */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Examples; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		04FCE2CB26D5046F001D1BE8 /* Frameworks */ = {
@@ -85,8 +85,7 @@
 			children = (
 				0441C9DB2EA0458A007B4243 /* Fourier.icon */,
 				04FCE2D526D50470001D1BE8 /* Assets.xcassets */,
-				04B5F3BA293A16520088A0D9 /* fourier.svg */,
-				046203B62C23A7EC00AB6BD9 /* pi.svg */,
+				04159B732F5C899600752ADC /* Examples */,
 				04FCE2DA26D50470001D1BE8 /* Info.plist */,
 			);
 			path = Resources;
@@ -145,6 +144,9 @@
 			);
 			dependencies = (
 			);
+			fileSystemSynchronizedGroups = (
+				04159B732F5C899600752ADC /* Examples */,
+			);
 			name = Fourier;
 			packageProductDependencies = (
 				04BA916826DC008900014C93 /* ComplexModule */,
@@ -197,8 +199,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				04FCE2D626D50470001D1BE8 /* Assets.xcassets in Resources */,
-				046203B72C23A7EC00AB6BD9 /* pi.svg in Resources */,
-				04B5F3BB293A16520088A0D9 /* fourier.svg in Resources */,
 				0441C9DC2EA0458A007B4243 /* Fourier.icon in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

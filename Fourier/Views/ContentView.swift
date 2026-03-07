@@ -116,7 +116,7 @@ struct ContentView: View {
                                         Button {
                                             model.importSVG(url: file.url, size: size)
                                         } label: {
-                                            Label(file.name, systemImage: file.systemImage)
+                                            Text(file.name)
                                         }
                                     }
                                 }

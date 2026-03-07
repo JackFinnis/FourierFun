@@ -12,7 +12,6 @@ struct ContentView: View {
     @Environment(\.requestReview) var requestReview
     @AppStorage("featuresUsed") var featuresUsed = 0
     @State var model = Model()
-    @State var showFileImporter = false
 
     var title: String {
         if model.path == nil || model.isDrawing {
@@ -101,35 +100,12 @@ struct ContentView: View {
                 }
                 .toolbar {
                     if model.path == nil {
-                        ToolbarItem(placement: .primaryAction) {
-                            Menu {
-                                Section("Import SVG") {
-                                    Button {
-                                        showFileImporter = true
-                                    } label: {
-                                        Text("Choose File")
-                                        Image(systemName: "folder")
+                        ToolbarItem(placement: .bottomBar) {
+                            Menu("Examples") {
+                                ForEach(ExampleFile.allCases, id: \.self) { file in
+                                    Button(file.name) {
+                                        model.importSVG(url: file.url, size: size)
                                     }
-                                }
-                                Section("Examples") {
-                                    ForEach(ExampleFile.allCases, id: \.self) { file in
-                                        Button {
-                                            model.importSVG(url: file.url, size: size)
-                                        } label: {
-                                            Text(file.name)
-                                        }
-                                    }
-                                }
-                            } label: {
-                                Label("Import", systemImage: "plus")
-                            }
-                            .menuOrder(.fixed)
-                            .fileImporter(isPresented: $showFileImporter, allowedContentTypes: [.svg]) { result in
-                                switch result {
-                                case .success(let url):
-                                    model.importSVG(url: url, size: size)
-                                case .failure(let error):
-                                    print(error)
                                 }
                             }
                         }

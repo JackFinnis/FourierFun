@@ -20,3 +20,5 @@ struct FourierApp: App {
 #Preview {
     ContentView()
 }
+
+// more svgs: repeating patterns, skyline

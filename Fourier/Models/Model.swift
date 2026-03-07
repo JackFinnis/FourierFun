@@ -40,10 +40,7 @@ class Model {
     
     func importSVG(url: URL, size: CGSize) {
         do {
-            _ = url.startAccessingSecurityScopedResource()
             let svg = try SVG.make(from: url)
-            url.stopAccessingSecurityScopedResource()
-
             guard let cgPath = SVGPathParser.cgPath(from: svg) else { return }
             let points = cgPath.samplePoints()
             let scaledPoints = scale(points: points, size: size)

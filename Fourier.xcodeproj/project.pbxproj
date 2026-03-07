@@ -23,8 +23,6 @@
 		04E618222F5B98900019EE9B /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E618212F5B988E0019EE9B /* URL.swift */; };
 		04E618242F5B9B920019EE9B /* PathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E618232F5B9B920019EE9B /* PathView.swift */; };
 		04E618262F5BA22D0019EE9B /* EpicycleFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E618252F5BA22D0019EE9B /* EpicycleFrame.swift */; };
-		04E618282F5BB0110019EE9B /* DrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E618272F5BB0110019EE9B /* DrawingView.swift */; };
-		04E6182A2F5BB0230019EE9B /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E618292F5BB0230019EE9B /* WelcomeView.swift */; };
 		04E6182C2F5BB02D0019EE9B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E6182B2F5BB02D0019EE9B /* ContentView.swift */; };
 		04FCE2D226D5046F001D1BE8 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCE2D126D5046F001D1BE8 /* App.swift */; };
 		04FCE2D626D50470001D1BE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04FCE2D526D50470001D1BE8 /* Assets.xcassets */; };
@@ -45,8 +43,6 @@
 		04E618212F5B988E0019EE9B /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		04E618232F5B9B920019EE9B /* PathView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathView.swift; sourceTree = "<group>"; };
 		04E618252F5BA22D0019EE9B /* EpicycleFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpicycleFrame.swift; sourceTree = "<group>"; };
-		04E618272F5BB0110019EE9B /* DrawingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingView.swift; sourceTree = "<group>"; };
-		04E618292F5BB0230019EE9B /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		04E6182B2F5BB02D0019EE9B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		04FCE2CE26D5046F001D1BE8 /* Fourier.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fourier.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04FCE2D126D5046F001D1BE8 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
@@ -106,8 +102,6 @@
 			children = (
 				04FCE2D126D5046F001D1BE8 /* App.swift */,
 				04E6182B2F5BB02D0019EE9B /* ContentView.swift */,
-				04E618292F5BB0230019EE9B /* WelcomeView.swift */,
-				04E618272F5BB0110019EE9B /* DrawingView.swift */,
 				04E618232F5B9B920019EE9B /* PathView.swift */,
 				04E6181D2F5B558F0019EE9B /* EpicycleView.swift */,
 				04E618252F5BA22D0019EE9B /* EpicycleFrame.swift */,
@@ -227,7 +221,6 @@
 				04FCE2D226D5046F001D1BE8 /* App.swift in Sources */,
 				04E618262F5BA22D0019EE9B /* EpicycleFrame.swift in Sources */,
 				04E6181E2F5B558F0019EE9B /* EpicycleView.swift in Sources */,
-				04E618282F5BB0110019EE9B /* DrawingView.swift in Sources */,
 				04E618222F5B98900019EE9B /* URL.swift in Sources */,
 				04E618202F5B96BD0019EE9B /* Speed.swift in Sources */,
 				049BDA252C4E85A300652F71 /* ExampleFile.swift in Sources */,
@@ -236,7 +229,6 @@
 				04E6182C2F5BB02D0019EE9B /* ContentView.swift in Sources */,
 				04BA916626DBFB4400014C93 /* Fourier.swift in Sources */,
 				04B5F38A2938C1AE0088A0D9 /* Int.swift in Sources */,
-				04E6182A2F5BB0230019EE9B /* WelcomeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

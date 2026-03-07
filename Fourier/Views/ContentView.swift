@@ -12,6 +12,18 @@ struct ContentView: View {
     @Environment(\.requestReview) var requestReview
     @AppStorage("featuresUsed") var featuresUsed = 0
     @State var model = Model()
+    @State var showFileImporter = false
+    @State var showExport = false
+
+    var title: String {
+        if model.path == nil {
+            return "Fourier"
+        } else if model.isDrawing {
+            return ""
+        } else {
+            return Int(model.epicycles).formatted(singular: "Epicycle")
+        }
+    }
 
     var body: some View {
         NavigationStack {
@@ -26,9 +38,18 @@ struct ContentView: View {
                         .fill(.background)
 
                     if let path = model.path {
-                        DrawingView(model: model, path: path)
+                        if model.isAnimating {
+                            EpicycleView(model: model)
+                                .ignoresSafeArea()
+                        } else {
+                            PathView(path: path)
+                                .ignoresSafeArea()
+                        }
                     } else {
-                        WelcomeView(model: model, size: size)
+                        Image(systemName: "hand.draw.fill")
+                            .font(.largeTitle)
+                            .imageScale(.large)
+                            .foregroundStyle(.secondary)
                     }
                 }
                 .gesture(
@@ -50,8 +71,126 @@ struct ContentView: View {
                             model.transform(points: points, size: size)
                         }
                 )
+                .toolbar {
+                    ToolbarItem(placement: .principal) {
+                        Text(title)
+                            .font(.headline)
+                            .monospacedDigit()
+                    }
+                }
+                .toolbarTitleMenu {
+                    Link(destination: URL(string: "https://youtu.be/r6sGWTCMz2k")!) {
+                        Text("But what is a Fourier series?")
+                        Text("3Blue1Brown, YouTube")
+                        Image(systemName: "play.rectangle.fill")
+                    }
+                    Section("Fourier") {
+                        Button {
+                            requestReview()
+                        } label: {
+                            Label("Rate Fourier", systemImage: "star")
+                        }
+                        Link(destination: URL(string: "https://apps.apple.com/app/id1582827502?action=write-review")!) {
+                            Label("Write a Review", systemImage: "quote.bubble")
+                        }
+                        Link(destination: URL(string: "mailto:jack@jackfinnis.com?subject=Fourier%20Feedback")!) {
+                            Label("Send Feedback", systemImage: "envelope")
+                        }
+                        Link(destination: URL(string: "https://apps.apple.com/developer/1633101066")!) {
+                            Label("More Apps by Jack", systemImage: "square.grid.2x2")
+                        }
+                    }
+                }
+                .toolbar {
+                    if model.path == nil {
+                        ToolbarItem(placement: .primaryAction) {
+                            Menu {
+                                Section("Import SVG") {
+                                    Button {
+                                        showFileImporter = true
+                                    } label: {
+                                        Text("Choose File")
+                                        Image(systemName: "folder")
+                                    }
+                                }
+                                Section("Examples") {
+                                    ForEach(ExampleFile.allCases, id: \.self) { file in
+                                        Button {
+                                            model.importSVG(url: file.url, size: size)
+                                        } label: {
+                                            Label(file.name, systemImage: file.systemImage)
+                                        }
+                                    }
+                                }
+                            } label: {
+                                Label("Import", systemImage: "plus")
+                            }
+                            .menuOrder(.fixed)
+                            .fileImporter(isPresented: $showFileImporter, allowedContentTypes: [.svg]) { result in
+                                switch result {
+                                case .success(let url):
+                                    model.importSVG(url: url, size: size)
+                                case .failure(let error):
+                                    print(error)
+                                }
+                            }
+                        }
+                    } else if !model.isDrawing {
+                        ToolbarItem(placement: .cancellationAction) {
+                            Button {
+                                model.reset()
+                            } label: {
+                                Label("Reset", systemImage: "xmark")
+                            }
+                        }
+                        ToolbarItemGroup(placement: .primaryAction) {
+                            if model.isAnimating {
+                                Button {
+                                    model.speed = model.speed.next
+                                } label: {
+                                    Text(model.speed.label)
+                                        .monospacedDigit()
+                                }
+                            }
+                            Button {
+                                model.isAnimating.toggle()
+                            } label: {
+                                Label(model.isAnimating ? "Stop" : "Play", systemImage: model.isAnimating ? "stop.fill" : "play.fill")
+                            }
+                        }
+                        ToolbarItem(placement: .primaryAction) {
+                            Button {
+                                model.renderPNG()
+                                model.renderGIF()
+                                showExport = true
+                            } label: {
+                                Label("Export", systemImage: "square.and.arrow.up")
+                            }
+                            .confirmationDialog("Export", isPresented: $showExport) {
+                                ShareLink("Image", item: .sharePNG)
+                                ShareLink("Video", item: .shareGIF)
+                            }
+                        }
+                        ToolbarItem(placement: .bottomBar) {
+                            Slider(value: $model.epicycles, in: model.nRange, step: 1) { isSliding in
+                                if !isSliding { model.update() }
+                            }
+                            .padding(.horizontal, 10)
+                        }
+                        ToolbarSpacer(placement: .bottomBar)
+                        ToolbarItem(placement: .bottomBar) {
+                            Stepper("Epicycles", value: $model.epicycles, in: model.nRange) { isStepping in
+                                if !isStepping { model.update() }
+                            }
+                            .font(.headline)
+                            .labelsHidden()
+                            .padding(.horizontal, 5)
+                        }
+                    }
+                }
             }
         }
+        .monospacedDigit()
         .onChange(of: model.path) { _, _ in
             if model.path == nil {
                 featuresUsed += 1

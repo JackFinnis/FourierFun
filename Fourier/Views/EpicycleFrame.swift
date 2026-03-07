@@ -21,17 +21,22 @@ struct EpicycleFrame: View {
                 let penIdx = Int(t * Double(totalPoints)) % totalPoints
                 let style = StrokeStyle(lineWidth: 3, lineCap: .round, lineJoin: .round)
 
-                for i in 0..<totalPoints {
-                    let age = ((penIdx - i) % totalPoints + totalPoints) % totalPoints
-                    let opacity = 1.0 - Double(age) / Double(totalPoints)
+                let accent = Color.accentColor
+                let bg = Color.white
+
+                // Draw oldest segments first so newest appear on top
+                for age in stride(from: totalPoints - 1, through: 0, by: -1) {
+                    let i = (penIdx - age + totalPoints) % totalPoints
+                    let fraction = 1.0 - Double(age) / Double(totalPoints)
 
                     if !firstCycleComplete && age > penIdx { continue }
-                    guard opacity > 0.01 else { continue }
+                    guard fraction > 0.01 else { continue }
 
                     var line = Path()
                     line.move(to: model.penPoints[i])
                     line.addLine(to: model.penPoints[(i + 1) % totalPoints])
-                    context.stroke(line, with: .color(.accentColor.opacity(opacity)), style: style)
+                    let color = bg.mix(with: accent, by: fraction, in: .perceptual)
+                    context.stroke(line, with: .color(color), style: style)
                 }
             }
 

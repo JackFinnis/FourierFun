@@ -22,7 +22,7 @@ enum Speed: CaseIterable {
 
     var label: String {
         switch self {
-        case .slow:     "0.5x"
+        case .slow:     ".5x"
         case .normal:   "1x"
         case .fast:     "2x"
         }

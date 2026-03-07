@@ -7,7 +7,6 @@
 
 import SwiftUI
 import Vision
-import VectorPlus
 import SwiftSVG
 import ComplexModule
 
@@ -44,9 +43,9 @@ class Model {
             _ = url.startAccessingSecurityScopedResource()
             let svg = try SVG.make(from: url)
             url.stopAccessingSecurityScopedResource()
-            
-            let cgPath = svg.path(size: .init(size))
-            let points = cgPath.copy(dashingWithPhase: 0, lengths: [2]).points
+
+            guard let cgPath = SVGPathParser.cgPath(from: svg) else { return }
+            let points = cgPath.samplePoints()
             let scaledPoints = scale(points: points, size: size)
             transform(points: scaledPoints, size: size)
         } catch {
@@ -90,6 +89,7 @@ class Model {
     }
     
     func transform(points: [CGPoint], size: CGSize) {
+        print(points.count)
         self.size = size
         reset()
         guard points.count > 1 else { return }

@@ -5,7 +5,7 @@
 //  Created by Jack Finnis on 22/07/2024.
 //
 
-import Foundation
+import SwiftUI
 
 enum ExampleFile: String, CaseIterable {
     case fourier
@@ -33,4 +33,8 @@ enum ExampleFile: String, CaseIterable {
     var url: URL {
         Bundle.main.url(forResource: rawValue, withExtension: "svg")!
     }
+}
+
+#Preview {
+    ContentView()
 }

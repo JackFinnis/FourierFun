@@ -26,7 +26,7 @@ struct EpicycleFrame: View {
                 let bg: Color = colorScheme == .dark ? .black : .white
 
                 // Draw oldest segments first so newest appear on top
-                for age in stride(from: totalPoints - 1, through: 0, by: -1) {
+                for age in stride(from: totalPoints - 1, through: 1, by: -1) {
                     let i = (penIdx - age + totalPoints) % totalPoints
                     let fraction = 1.0 - Double(age) / Double(totalPoints)
 
@@ -38,6 +38,14 @@ struct EpicycleFrame: View {
                     line.addLine(to: model.penPoints[(i + 1) % totalPoints])
                     let color = bg.mix(with: accent, by: fraction, in: .perceptual)
                     context.stroke(line, with: .color(color), style: style)
+                }
+
+                // Draw segment from last discrete pen point to current epicycle tip
+                if let tip = positions.last {
+                    var line = Path()
+                    line.move(to: model.penPoints[penIdx])
+                    line.addLine(to: tip)
+                    context.stroke(line, with: .color(accent), style: style)
                 }
             }
 

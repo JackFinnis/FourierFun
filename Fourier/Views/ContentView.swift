@@ -65,7 +65,7 @@ struct ContentView: View {
                         .onEnded { _ in
                             model.isDrawing = false
                             guard let path = model.path else { return }
-                            let points = path.cgPath.copy(dashingWithPhase: 0, lengths: [10]).points
+                            let points = path.cgPath.samplePoints()
                             model.transform(points: points, size: size)
                         }
                 )

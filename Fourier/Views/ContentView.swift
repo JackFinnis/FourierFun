@@ -13,6 +13,7 @@ struct ContentView: View {
     @AppStorage("featuresUsed") var featuresUsed = 0
     @State var model = Model()
     @State var progressiveStartDate = Date.now
+    @State var showShareSheet = false
 
     init() {
         UINavigationBar.appearance().titleTextAttributes = [.font : UIFont.headline]
@@ -85,18 +86,21 @@ struct ContentView: View {
                     }
                     Section("Fourier") {
                         Button {
-                            requestReview()
+                            showShareSheet = true
                         } label: {
-                            Label("Rate Fourier", systemImage: "star")
+                            Label("Share", systemImage: "square.and.arrow.up")
                         }
-                        Link(destination: URL(string: "https://apps.apple.com/app/id1582827502?action=write-review")!) {
-                            Label("Write a Review", systemImage: "quote.bubble")
+                        Link(destination: URL(string: "https://jackfinnis.com/apps/fourier")!) {
+                            Label("Get Help", systemImage: "questionmark.circle")
                         }
                         Link(destination: URL(string: "mailto:jack@jackfinnis.com?subject=Fourier%20Feedback")!) {
                             Label("Send Feedback", systemImage: "envelope")
                         }
+                        Link(destination: URL(string: "https://apps.apple.com/app/id1582827502?action=write-review")!) {
+                            Label("Write a Review", systemImage: "star")
+                        }
                         Link(destination: URL(string: "https://apps.apple.com/developer/1633101066")!) {
-                            Label("More Apps by Jack", systemImage: "square.grid.2x2")
+                            Label("More Apps", systemImage: "square.grid.2x2")
                         }
                     }
                 }
@@ -147,6 +151,10 @@ struct ContentView: View {
             }
         }
         .monospacedDigit()
+        .sheet(isPresented: $showShareSheet) {
+            ShareSheet(items: [URL(string: "https://apps.apple.com/app/id1582827502")!])
+                .presentationDetents([.medium])
+        }
         .onReceive(Timer.publish(every: 1.0/30, on: .main, in: .common).autoconnect()) { _ in
             guard model.isProgressive else { return }
             let upperBound = model.nRange.upperBound
@@ -169,6 +177,16 @@ struct ContentView: View {
             }
         }
     }
+}
+
+struct ShareSheet: UIViewControllerRepresentable {
+    let items: [Any]
+
+    func makeUIViewController(context: Context) -> UIActivityViewController {
+        UIActivityViewController(activityItems: items, applicationActivities: nil)
+    }
+
+    func updateUIViewController(_ vc: UIActivityViewController, context: Context) {}
 }
 
 #Preview {

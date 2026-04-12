@@ -7,50 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		04159B792F5C945A00752ADC /* SVGPathParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04159B782F5C945A00752ADC /* SVGPathParser.swift */; };
-		04159B7B2F5CAE2500752ADC /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04159B7A2F5CAE2500752ADC /* Array.swift */; };
-		04159B7F2F5CB35200752ADC /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04159B7E2F5CB35200752ADC /* UIFont.swift */; };
-		0441C9DC2EA0458A007B4243 /* Fourier.icon in Resources */ = {isa = PBXBuildFile; fileRef = 0441C9DB2EA0458A007B4243 /* Fourier.icon */; };
 		049BDA1A2C4E79DA00652F71 /* VectorPlus in Frameworks */ = {isa = PBXBuildFile; productRef = 049BDA192C4E79DA00652F71 /* VectorPlus */; };
-		049BDA252C4E85A300652F71 /* ExampleFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049BDA242C4E85A300652F71 /* ExampleFile.swift */; };
-		04A6557F293D24450084CC6A /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A6557E293D24450084CC6A /* Collection.swift */; };
-		04B5F38A2938C1AE0088A0D9 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B5F3892938C1AE0088A0D9 /* Int.swift */; };
-		04B5F3B9293965F60088A0D9 /* CGPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B5F3B8293965F60088A0D9 /* CGPath.swift */; };
-		04BA916026DB9FE600014C93 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BA915F26DB9FE600014C93 /* Model.swift */; };
-		04BA916626DBFB4400014C93 /* Fourier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BA916526DBFB4400014C93 /* Fourier.swift */; };
 		04BA916926DC008900014C93 /* ComplexModule in Frameworks */ = {isa = PBXBuildFile; productRef = 04BA916826DC008900014C93 /* ComplexModule */; };
-		04E6181E2F5B558F0019EE9B /* EpicycleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E6181D2F5B558F0019EE9B /* EpicycleView.swift */; };
-		04E618202F5B96BD0019EE9B /* Speed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E6181F2F5B96BD0019EE9B /* Speed.swift */; };
-		04E618262F5BA22D0019EE9B /* EpicycleFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E618252F5BA22D0019EE9B /* EpicycleFrame.swift */; };
-		04E6182C2F5BB02D0019EE9B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E6182B2F5BB02D0019EE9B /* ContentView.swift */; };
-		04FCE2D226D5046F001D1BE8 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCE2D126D5046F001D1BE8 /* App.swift */; };
-		04FCE2D626D50470001D1BE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04FCE2D526D50470001D1BE8 /* Assets.xcassets */; };
 		DF40CAA2D7424173960B6977 /* TelemetryDeck in Frameworks */ = {isa = PBXBuildFile; productRef = 9AC810F8AB404B4A91ABF0B2 /* TelemetryDeck */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		04159B782F5C945A00752ADC /* SVGPathParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVGPathParser.swift; sourceTree = "<group>"; };
-		04159B7A2F5CAE2500752ADC /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
-		04159B7E2F5CB35200752ADC /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
-		0441C9DB2EA0458A007B4243 /* Fourier.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = Fourier.icon; sourceTree = "<group>"; };
-		049BDA242C4E85A300652F71 /* ExampleFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleFile.swift; sourceTree = "<group>"; };
-		04A6557E293D24450084CC6A /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
-		04B5F3892938C1AE0088A0D9 /* Int.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
-		04B5F3B8293965F60088A0D9 /* CGPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPath.swift; sourceTree = "<group>"; };
-		04BA915F26DB9FE600014C93 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
-		04BA916526DBFB4400014C93 /* Fourier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fourier.swift; sourceTree = "<group>"; };
-		04E6181D2F5B558F0019EE9B /* EpicycleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpicycleView.swift; sourceTree = "<group>"; };
-		04E6181F2F5B96BD0019EE9B /* Speed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speed.swift; sourceTree = "<group>"; };
-		04E618252F5BA22D0019EE9B /* EpicycleFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpicycleFrame.swift; sourceTree = "<group>"; };
-		04E6182B2F5BB02D0019EE9B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		04FCE2CE26D5046F001D1BE8 /* Fourier.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fourier.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		04FCE2D126D5046F001D1BE8 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
-		04FCE2D526D50470001D1BE8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		04FCE2DA26D50470001D1BE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		048B4F182F8B2970009C2585 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Resources/Info.plist,
+			);
+			target = 04FCE2CD26D5046F001D1BE8 /* Fourier */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		04159B732F5C899600752ADC /* Examples */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Examples; sourceTree = "<group>"; };
+		048B4EFE2F8B296F009C2585 /* Fourier */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (048B4F182F8B2970009C2585 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Fourier; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,66 +35,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-04BA916926DC008900014C93 /* ComplexModule in Frameworks */,
+				04BA916926DC008900014C93 /* ComplexModule in Frameworks */,
 				049BDA1A2C4E79DA00652F71 /* VectorPlus in Frameworks */,
 				DF40CAA2D7424173960B6977 /* TelemetryDeck in Frameworks */,
-			
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		049BDA1D2C4E855E00652F71 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				04159B782F5C945A00752ADC /* SVGPathParser.swift */,
-				049BDA242C4E85A300652F71 /* ExampleFile.swift */,
-				04BA916526DBFB4400014C93 /* Fourier.swift */,
-				04BA915F26DB9FE600014C93 /* Model.swift */,
-				04E6181F2F5B96BD0019EE9B /* Speed.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		04A65580293D436E0084CC6A /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				04159B7A2F5CAE2500752ADC /* Array.swift */,
-				04B5F3B8293965F60088A0D9 /* CGPath.swift */,
-				04A6557E293D24450084CC6A /* Collection.swift */,
-				04B5F3892938C1AE0088A0D9 /* Int.swift */,
-				04159B7E2F5CB35200752ADC /* UIFont.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		04B5F3882938BBA70088A0D9 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				0441C9DB2EA0458A007B4243 /* Fourier.icon */,
-				04FCE2D526D50470001D1BE8 /* Assets.xcassets */,
-				04159B732F5C899600752ADC /* Examples */,
-				04FCE2DA26D50470001D1BE8 /* Info.plist */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
-		04E6182D2F5BB0390019EE9B /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				04FCE2D126D5046F001D1BE8 /* App.swift */,
-				04E6182B2F5BB02D0019EE9B /* ContentView.swift */,
-				04E6181D2F5B558F0019EE9B /* EpicycleView.swift */,
-				04E618252F5BA22D0019EE9B /* EpicycleFrame.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		04FCE2C526D5046F001D1BE8 = {
 			isa = PBXGroup;
 			children = (
-				04FCE2D026D5046F001D1BE8 /* Fourier */,
+				048B4EFE2F8B296F009C2585 /* Fourier */,
 				04FCE2CF26D5046F001D1BE8 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -128,17 +58,6 @@
 				04FCE2CE26D5046F001D1BE8 /* Fourier.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		04FCE2D026D5046F001D1BE8 /* Fourier */ = {
-			isa = PBXGroup;
-			children = (
-				04A65580293D436E0084CC6A /* Extensions */,
-				049BDA1D2C4E855E00652F71 /* Models */,
-				04B5F3882938BBA70088A0D9 /* Resources */,
-				04E6182D2F5BB0390019EE9B /* Views */,
-			);
-			path = Fourier;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -157,14 +76,13 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				04159B732F5C899600752ADC /* Examples */,
+				048B4EFE2F8B296F009C2585 /* Fourier */,
 			);
 			name = Fourier;
 			packageProductDependencies = (
 				04BA916826DC008900014C93 /* ComplexModule */,
 				049BDA192C4E79DA00652F71 /* VectorPlus */,
 				9AC810F8AB404B4A91ABF0B2 /* TelemetryDeck */,
-
 			);
 			productName = Fourier;
 			productReference = 04FCE2CE26D5046F001D1BE8 /* Fourier.app */;
@@ -198,7 +116,6 @@
 				04BA916726DC008800014C93 /* XCRemoteSwiftPackageReference "swift-numerics" */,
 				049BDA182C4E79DA00652F71 /* XCRemoteSwiftPackageReference "VectorPlus" */,
 				D44DA16DB177448E917825D8 /* XCRemoteSwiftPackageReference "SwiftSDK" */,
-
 			);
 			productRefGroup = 04FCE2CF26D5046F001D1BE8 /* Products */;
 			projectDirPath = "";
@@ -214,8 +131,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04FCE2D626D50470001D1BE8 /* Assets.xcassets in Resources */,
-				0441C9DC2EA0458A007B4243 /* Fourier.icon in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -226,20 +141,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04BA916026DB9FE600014C93 /* Model.swift in Sources */,
-				04FCE2D226D5046F001D1BE8 /* App.swift in Sources */,
-				04E618262F5BA22D0019EE9B /* EpicycleFrame.swift in Sources */,
-				04E6181E2F5B558F0019EE9B /* EpicycleView.swift in Sources */,
-				04E618202F5B96BD0019EE9B /* Speed.swift in Sources */,
-				049BDA252C4E85A300652F71 /* ExampleFile.swift in Sources */,
-				04A6557F293D24450084CC6A /* Collection.swift in Sources */,
-				04B5F3B9293965F60088A0D9 /* CGPath.swift in Sources */,
-				04159B7F2F5CB35200752ADC /* UIFont.swift in Sources */,
-				04159B792F5C945A00752ADC /* SVGPathParser.swift in Sources */,
-				04E6182C2F5BB02D0019EE9B /* ContentView.swift in Sources */,
-				04159B7B2F5CAE2500752ADC /* Array.swift in Sources */,
-				04BA916626DBFB4400014C93 /* Fourier.swift in Sources */,
-				04B5F38A2938C1AE0088A0D9 /* Int.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -383,7 +284,7 @@
 				INFOPLIST_FILE = Fourier/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Fourier;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.graphics-design";
-				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -413,7 +314,7 @@
 				INFOPLIST_FILE = Fourier/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Fourier;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.graphics-design";
-				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

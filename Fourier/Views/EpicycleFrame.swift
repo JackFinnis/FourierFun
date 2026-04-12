@@ -34,7 +34,18 @@ struct EpicycleFrame: View {
                     var line = Path()
                     line.move(to: model.penPoints[i])
                     line.addLine(to: model.penPoints[(i + 1) % totalPoints])
-                    let color = bg.mix(with: accent, by: fraction, in: .perceptual)
+                    let color: Color = {
+                        if #available(iOS 18.0, *) {
+                            return bg.mix(with: accent, by: fraction, in: .perceptual)
+                        } else {
+                            var r1: CGFloat = 0, g1: CGFloat = 0, b1: CGFloat = 0, a1: CGFloat = 0
+                            var r2: CGFloat = 0, g2: CGFloat = 0, b2: CGFloat = 0, a2: CGFloat = 0
+                            UIColor(bg).getRed(&r1, green: &g1, blue: &b1, alpha: &a1)
+                            UIColor(accent).getRed(&r2, green: &g2, blue: &b2, alpha: &a2)
+                            let f = CGFloat(fraction)
+                            return Color(red: r1 + (r2 - r1) * f, green: g1 + (g2 - g1) * f, blue: b1 + (b2 - b1) * f)
+                        }
+                    }()
                     context.stroke(line, with: .color(color), style: style)
                 }
 
